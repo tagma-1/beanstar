@@ -1,6 +1,8 @@
 @import "bootstrap";
 
-$navbar-default-bg: #FFF; 
+body {
+  font-family: 'Work Sans', sans-serif;
+}
 
 #logo {
   float: left;
@@ -14,4 +16,27 @@ $navbar-default-bg: #FFF;
 #logo:hover {
   color: #000000;
   text-decoration: none;
+}
+
+.jumbotron {
+  background-image: asset-url("coffee_2.jpg");
+  background-size: cover;
+  // height: 300px;
+}
+
+.jumbotron h1, .jumbotron h3 {
+  color: #FFF;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+.jumbotron h3 {
+  width: 60%;
+  text-align: center;
+}
+
+.underline {
+  text-decoration: underline;
 }
