@@ -1,9 +1,12 @@
-<!-- Main jumbotron for to introduce Beanstar and encourage users to log in or sign up -->
+<!-- Main jumbotron to introduce Beanstar and encourage users to log in or sign up -->
 <div class="jumbotron">
   <div class="container" align="center">
     <h1 class="display-3">Buy. Roast. Sell.</h1>
     <h3>Beanstar is <span class="underline">the</span> marketplace for Aussie coffee enthusiasts to buy and sell fresh specialty roasts.</h3>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    <div class="row">
+      <p class="col-md-3 offset-md-3"><%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary btn-lg btn-xlarge" %></p>
+      <p class="col-md-3"><%= link_to 'Log In', new_user_session_path, class: "btn btn-primary btn-lg btn-xlarge" %></p>
+    </div>
   </div>
 </div>
 

@@ -1,5 +1,6 @@
 @import "bootstrap";
 
+/* Global font to customise appearance */
 body {
   font-family: 'Work Sans', sans-serif;
 }
@@ -24,7 +25,7 @@ body {
   // height: 300px;
 }
 
-.jumbotron h1, .jumbotron h3 {
+.jumbotron h1 {
   color: #FFF;
   text-align: center;
   margin-bottom: 30px;
@@ -33,10 +34,30 @@ body {
 }
 
 .jumbotron h3 {
+ color: #FFF;
+  margin-bottom: 30px;
+  letter-spacing: -1px;
   width: 60%;
   text-align: center;
 }
 
 .underline {
   text-decoration: underline;
+}
+
+.btn-xlarge {
+  background-color: #865846;
+  border-color: #FFF;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.btn-xlarge:hover {
+  background-color: #562300;
+  text-decoration: none;
+  border-color: #FFF;
+}
+
+.control-label {
+  padding-top: 0.5em;
 }
