@@ -8,21 +8,36 @@ body {
 #logo {
   float: left;
   font-size: 1.7em;
-  color: #000000;
+  color: #562300;
   text-transform: uppercase;
   letter-spacing: -1px;
   font-weight: bold;
 }
 
 #logo:hover {
-  color: #000000;
+  color: #562300;
   text-decoration: none;
 }
+
+.btn-outline-success  {
+  border-color: #865846;
+  color: #865846;
+}
+
+.btn-outline-success:hover  {
+  background-color: #865846;
+  border-color: #FFF;
+}
+
 
 .jumbotron {
   background-image: asset-url("coffee_2.jpg");
   background-size: cover;
   // height: 300px;
+}
+
+h1 {
+ color: #562300;
 }
 
 .jumbotron h1 {
@@ -34,7 +49,7 @@ body {
 }
 
 .jumbotron h3 {
- color: #FFF;
+  color: #FFF;
   margin-bottom: 30px;
   letter-spacing: -1px;
   width: 60%;
