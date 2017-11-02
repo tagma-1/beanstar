@@ -29,7 +29,6 @@ body {
   border-color: #FFF;
 }
 
-
 .jumbotron {
   background-image: asset-url("coffee_2.jpg");
   background-size: cover;
@@ -75,4 +74,12 @@ h1 {
 
 .control-label {
   padding-top: 0.5em;
+}
+
+.card-body {
+  padding: 0.25em;
+}
+
+.control-label {
+  padding-top: 0;
 }

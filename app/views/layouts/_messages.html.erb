@@ -1,0 +1,18 @@
+<!-- Displays flash messages with Bootstrap styling according to the message. The íf statements are to display Devise messsages with styling.-->
+
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <% flash.each do |type, msg| %>
+      <% if type == "notice" %>
+        <div class="alert alert-success">
+      <% elsif type == "alert" %>
+        <div class="alert alert-danger">
+      <% else %>
+        <div class='alert alert-<%= "#{type}" %>'>
+      <% end %>
+      <a href="#" class="close" data-dismiss="alert">&#215;</a>
+      <%= msg %>
+      </div>
+    <% end %>
+  </div>
+</div>

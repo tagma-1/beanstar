@@ -1,0 +1,59 @@
+<%= render 'shared/errors', obj: @profile %>
+
+
+
+<div class="container">
+  <div class="col-md-12">
+    <%= form_with(model: profile, local: true) do |form| %>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">
+          <%= form.label :first_name %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :first_name, id: :profile_first_name, class: "form-control", placeholder: "Enter your first name", autofocus: true %>
+        </div>
+      </div>  
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">
+          <%= form.label :last_name %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :last_name, id: :profile_last_name, class: "form-control", placeholder: "Enter your last name" %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">
+          <%= form.label :profile_name, "Public profile name" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :profile_name, id: :profile_profile_name, class: "form-control", placeholder: "Enter your public profile name" %>
+        </div>
+      </div> 
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">
+          <%= form.label :about, "About you" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_area :about, id: :about, rows: 5, class: "form-control", placeholder: "Tell other users about yourself!" %>
+        </div>
+      </div>       
+
+      <br>
+      <div class="offset-md-3">  
+        <p>Your profile image is automatically set to your Gravatar. Don't have one? <%= link_to "Sign up here!", "https://pt.gravatar.com/" %></p>
+      </div>
+      <br>
+      
+      <div class = "form-group">
+        <div class = "offset-md-3 col-md-10">
+          <%= form.submit "Create your profile", class: "btn btn-primary btn-lg btn-xlarge"  %>
+        </div>
+      </div>
+      <br>
+    <% end %>
+  </div>
+</div>

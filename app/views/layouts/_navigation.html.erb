@@ -14,11 +14,15 @@
       </li>
       <% if user_signed_in? %>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User Profile</a>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your Profile</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to 'My profile', root_path, class: "dropdown-item" %>
+            <% if Profile.find_by(user: current_user) != nil %>
+              <%= link_to 'My profile', profile_path(current_user), class: "dropdown-item" %>
+            <% else %>
+              <%= link_to 'Create profile', new_profile_path, class: "dropdown-item" %>
+            <% end %>
             <%= link_to 'My store', root_path, class: "dropdown-item" %>
-            <%= link_to 'My account', root_path, class: "dropdown-item" %>
+            <%= link_to 'My account', edit_user_registration_path, class: "dropdown-item" %>
             <%= link_to 'Inbox', root_path, class: "dropdown-item" %>
             <div class="dropdown-divider"></div>
             <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
