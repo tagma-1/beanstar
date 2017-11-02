@@ -3,10 +3,12 @@
   <div class="container" align="center">
     <h1 class="display-3">Buy. Roast. Sell.</h1>
     <h3>Beanstar is <span class="underline">the</span> marketplace for Aussie coffee enthusiasts to buy and sell fresh specialty roasts.</h3>
-    <div class="row">
-      <p class="col-md-3 offset-md-3"><%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary btn-lg btn-xlarge" %></p>
-      <p class="col-md-3"><%= link_to 'Log In', new_user_session_path, class: "btn btn-primary btn-lg btn-xlarge" %></p>
-    </div>
+    <% unless user_signed_in? %>
+      <div class="row">
+        <p class="col-md-3 offset-md-3"><%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary btn-lg btn-xlarge" %></p>
+        <p class="col-md-3"><%= link_to 'Log In', new_user_session_path, class: "btn btn-primary btn-lg btn-xlarge" %></p>
+      </div>
+    <% end %>
   </div>
 </div>
 
