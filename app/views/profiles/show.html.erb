@@ -43,6 +43,9 @@
     <br />
     <div align="center">
       <%= link_to 'Edit profile', edit_profile_path(@profile), class: "btn btn-primary btn-lg" %> 
+    </div>
+    <br />
+    <div align="center">
       <%= link_to 'Create store', root_path, class: "btn btn-primary btn-lg" %>
     </div>
 
@@ -50,7 +53,7 @@
   
 <% else %>
   
-  <%= render 'shared/page_title', title: "#{@profile.profile_name}'s Profile" %>
+  <%= render 'shared/page_title', title: "#{@profile.profile_name.capitalize}'s Profile" %>
   
   <div class="container">
     
@@ -82,6 +85,17 @@
         </tr>
       </tbody>
     </table>
+    
+    <br />
+    
+    <div align="center">
+      <%= link_to "Message #{@profile.profile_name.capitalize}", root_path, class: "btn btn-primary btn-lg" %> 
+    </div>
+    <br />
+    <div align="center">
+      <%= link_to "View #{@profile.profile_name.capitalize}'s store", root_path, class: "btn btn-primary btn-lg" %>
+    </div>
+
   </div>
 <% end %>
 
