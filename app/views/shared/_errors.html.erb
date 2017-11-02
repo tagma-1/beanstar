@@ -1,0 +1,22 @@
+<% if obj.errors.any? %>
+  <div class = "row">
+    <div class = "col-md-8 offset-md-2">
+      <div class = "card bg-danger text-light">
+        <div class = "card-header">
+          <h4 class = "card-title">
+              <%= pluralize(obj.errors.count, 'error') %>
+              prevented your <%= obj.class.to_s.downcase %> from being saved:
+          </h4>
+          <div class = "card-body">
+            <ul>
+              <% obj.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<br>

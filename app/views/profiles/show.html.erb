@@ -1,0 +1,88 @@
+<% if @profile.user_id == current_user.id %>
+  
+  <%= render 'shared/page_title', title: "My Profile" %>
+  
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-md-4 offset-md-4 center">
+        <%= gravatar_for @profile, size: 150 %>
+      </div>
+    </div>
+    <br />
+    
+    <table align="center">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>First Name</strong></td>
+          <td><%= @profile.first_name %></td>        
+        </tr>
+        <tr>
+          <td><strong>Last Name</strong></td>
+          <td><%= @profile.last_name %></td>        
+        </tr>
+        <tr>
+          <td><strong>Profile Name</strong></td>
+          <td><%= @profile.profile_name %></td>        
+        </tr>
+        <tr>
+          <td><strong>About:</strong></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= @profile.about %></td>        
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <div align="center">
+      <%= link_to 'Edit profile', edit_profile_path(@profile), class: "btn btn-primary btn-lg" %> 
+      <%= link_to 'Create store', root_path, class: "btn btn-primary btn-lg" %>
+    </div>
+
+  </div>
+  
+<% else %>
+  
+  <%= render 'shared/page_title', title: "#{@profile.profile_name}'s Profile" %>
+  
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-md-4 offset-md-4 center">
+        <%= gravatar_for @profile, size: 150 %>
+      </div>
+    </div>
+    <br />
+    
+    <table align="center">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Profile Name</strong></td>
+          <td><%= @profile.profile_name %></td>        
+        </tr>
+        <tr>
+          <td><strong>About:</strong></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= @profile.about %></td>        
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+
