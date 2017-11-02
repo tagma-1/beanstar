@@ -18,8 +18,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Signed in</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <% if @user_profile %>
-              <%= link_to 'My profile', profile_path(@user_profile), class: "dropdown-item" %>
+            <% if current_user.profile %>
+              <%= link_to 'My profile', profile_path(current_user.profile), class: "dropdown-item" %>
             <% else %>
               <%= link_to 'Create profile', new_profile_path, class: "dropdown-item" %>
             <% end %>
