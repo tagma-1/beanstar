@@ -10,6 +10,7 @@ class StoresController < ApplicationController
   # GET /stores/1
   # GET /stores/1.json
   def show
+    @address = [@store.address, @store.suburb, @store.postcode, @store.state].join(', ')
   end
 
   # GET /stores/new
