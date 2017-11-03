@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @store.user %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @store.name %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @store.image_url(:original) %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @store.address %>
+</p>
+
+<p>
+  <strong>Suburb:</strong>
+  <%= @store.suburb %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @store.state %>
+</p>
+
+<p>
+  <strong>Postcode:</strong>
+  <%= @store.postcode %>
+</p>
+
+<p>
+  <strong>About:</strong>
+  <%= @store.about %>
+</p>
+
+<p>
+  <strong>Roasting schedule:</strong>
+  <%= @store.roasting_schedule %>
+</p>
+
+<p>
+  <strong>Next roast:</strong>
+  <%= @store.next_roast %>
+</p>
+
+<p>
+  <strong>Pickup:</strong>
+  <%= @store.pickup %>
+</p>
+
+<%= link_to 'Edit', edit_store_path(@store) %> |
+<%= link_to 'Back', stores_path %>
