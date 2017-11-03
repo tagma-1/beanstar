@@ -13,17 +13,25 @@
         <li><%= link_to "Roasters", root_path, class: "nav-link" %></li>
       </li>
       
+      <!-- displays a drop-down menu for user actions if logged in -->
       <% if user_signed_in? %>
       
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Signed in</a>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= current_user.email %></a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            
             <% if current_user.profile %>
               <%= link_to 'My profile', profile_path(current_user.profile), class: "dropdown-item" %>
             <% else %>
               <%= link_to 'Create profile', new_profile_path, class: "dropdown-item" %>
             <% end %>
-            <%= link_to 'My store', root_path, class: "dropdown-item" %>
+            
+            <% if user_signed_in? && current_user.store && current_user.store.persisted? %>
+              <%= link_to 'My store', store_path(current_user.store), class: "dropdown-item" %>
+            <% else %>
+              <%= link_to 'Create store', new_store_path, class: "dropdown-item" %>
+            <% end %>
+            
             <%= link_to 'My account', edit_user_registration_path, class: "dropdown-item" %>
             <%= link_to 'Inbox', root_path, class: "dropdown-item" %>
             <div class="dropdown-divider"></div>
