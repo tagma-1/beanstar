@@ -20,6 +20,7 @@ class StoresController < ApplicationController
 
   # GET /stores/1/edit
   def edit
+    authorize @store
   end
 
   # POST /stores
@@ -42,6 +43,9 @@ class StoresController < ApplicationController
   # PATCH/PUT /stores/1
   # PATCH/PUT /stores/1.json
   def update
+    
+    authorize @store
+    
     respond_to do |format|
       if @store.update(store_params)
         format.html { redirect_to @store, notice: 'Store was successfully updated.' }
@@ -56,6 +60,9 @@ class StoresController < ApplicationController
   # DELETE /stores/1
   # DELETE /stores/1.json
   def destroy
+    
+    authorize @store
+    
     @store.destroy
     respond_to do |format|
       format.html { redirect_to stores_url, notice: 'Store was successfully destroyed.' }
