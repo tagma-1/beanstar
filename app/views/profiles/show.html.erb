@@ -47,7 +47,7 @@
     <br />
     <% if current_user.store %>
       <div align="center">
-        <%= link_to 'View store', store_path(current.user.store), class: "btn btn-primary btn-lg" %>
+        <%= link_to 'View store', store_path(current_user.store), class: "btn btn-primary btn-lg" %>
       </div>
     <% else %>
       <div align="center">

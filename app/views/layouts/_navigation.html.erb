@@ -26,7 +26,7 @@
               <%= link_to 'Create profile', new_profile_path, class: "dropdown-item" %>
             <% end %>
             
-            <% if current_user.store.persisted? %>
+            <% if user_signed_in? && current_user.store && current_user.store.persisted? %>
               <%= link_to 'My store', store_path(current_user.store), class: "dropdown-item" %>
             <% else %>
               <%= link_to 'Create store', new_store_path, class: "dropdown-item" %>

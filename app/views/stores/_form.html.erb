@@ -1,67 +1,114 @@
 <%= render 'shared/errors', obj: @store %>
 
-<%= form_with(model: store, local: true) do |form| %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :store_name %>
-  </div>
 
-  <div class="field">
-    <%= form.label :image, "Store logo" %>
-    <%= form.file_field :image, id: :store_image %>
-  </div>
-  
-  <% if @store.image_data? %>
-    <div class="field">
-      <%= image_tag @store.image_url(:thumb) %>
-    </div>
-    <div class="field">
-      Remove attachment: <%= form.check_box :remove_image %>
-    </div>
-  <% end %>
+<div class="container">
+  <div class="col-md-12">
+    <%= form_with(model: store, local: true) do |form| %>
+    
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">      
+          <%= form.label :name, "Store Name *" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :name, id: :store_name, class: "form-control", placeholder: "Enter your store name", autofocus: true %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address, id: :store_address %>
-  </div>
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">
+          <%= form.label :pickup, "Is pickup available for buyers? *" %>
+          <small class="form-text text-muted">If you select yes, you'll need to complete the address details below.</small>
+        </div>
+        <div class="col-md-8">
+          <%= form.select :pickup, options_for_select([['Yes', true], ['No', false]], {:selected => @store.pickup}), {}, class: "form-control", id: :store_pickup %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">      
+          <%= form.label :address, "Street Address" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :address, id: :store_address, class: "form-control", placeholder: "e.g 123 Main Street" %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :suburb %>
-    <%= form.text_field :suburb, id: :store_suburb %>
-  </div>
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">      
+          <%= form.label :suburb, "Suburb" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :suburb, id: :store_suburb, class: "form-control", placeholder: "Enter suburb" %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state, id: :store_state %>
-  </div>
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">
+          <%= form.label :state, "State *" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.select :state, options_for_select(["VIC", "NSW", "QLD", "SA", "WA", "NT", "TAS", "ACT"], selected: @store.state), {}, class: "form-control", id: :store_state %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :postcode %>
-    <%= form.number_field :postcode, id: :store_postcode %>
-  </div>
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">  
+          <%= form.label :postcode %>
+        </div>
+        <div class="col-md-8">
+          <%= form.number_field :postcode, id: :store_postcode, class: "form-control" %>
+        </div>
+      </div>
+    
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">      
+          <%= form.label :about, "About store *" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_area :about, rows: 5, id: :store_about, class: "form-control", placeholder: "Tell people about your store! What kind of beans do you use? How do you roast?" %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :about %>
-    <%= form.text_area :about, id: :store_about %>
-  </div>
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">
+          <%= form.label :roasting_schedule, "Roasting Schedule*" %>
+        </div>
+        <div class="col-md-8">
+        <%= form.text_area :roasting_schedule, id: :store_roasting_schedule, class: 'form-control', placeholder: "e.g. 'Monday and Wednesday' or 'Weekly' or 'Irregular'" %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :roasting_schedule %>
-    <%= form.text_area :roasting_schedule, id: :store_roasting_schedule %>
-  </div>
+      <br />
+      
+      <% if @store.image_data? %>
+        <div class="row">
+          <div class="control-label col-md-2 offset-md-1"> 
+            <p>Current store image</p>
+            <small class="form-text text-muted">Upload a new image to replace this one.</small>
+          </div>
+          <div class="col-md-8">
+            <%= image_tag @store.image_url(:thumb) %>
+          </div>
+        </div>
+      <% end %>
+    
+      <br />
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">    
+          <%= form.label :image, "Upload a store profile image" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.file_field :image, id: :store_image %>
+        </div>
+      </div>
+      <div class = "form-group">
+        <div class = "offset-md-3 col-md-10">
+          <%= form.submit "Submit", class: "btn btn-primary btn-lg btn-xlarge"  %>
+        </div>
+      </div>
+    <% end %>
 
-  <div class="field">
-    <%= form.label :next_roast %>
-    <%= form.date_select :next_roast, id: :store_next_roast %>
   </div>
-
-  <div class="field">
-    <%= form.label :pickup %>
-    <%= form.check_box :pickup, id: :store_pickup %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
