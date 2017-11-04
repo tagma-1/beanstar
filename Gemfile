@@ -46,6 +46,13 @@ gem 'shrine'
 
 gem 'aws-sdk', '~> 3'
 
+#For storage and conversion of prices
+gem 'money-rails', '~>1'
+
+#Form helpers
+gem 'country_select'
+gem 'bootstrap-datepicker-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

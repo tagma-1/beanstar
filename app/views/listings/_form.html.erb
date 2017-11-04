@@ -1,87 +1,161 @@
-<%= form_with(model: listing, local: true) do |form| %>
-  <% if listing.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+<%= render 'shared/errors', obj: @listing %>
 
-      <ul>
-      <% listing.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="container">
+  <div class="col-md-12">
+    <%= form_with(model: listing, local: true) do |form| %>
+    
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">      
+          <%= form.label :title, "Product Name *" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :title, id: :listing_title, class: "form-control", placeholder: "Enter your product name", autofocus: true %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">
+          <%= form.label :variety, "Variety *" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.select :variety, options_for_select(["Arabica", "Robusta", "Blend"], selected: @listing.variety), {}, class: "form-control", id: :listing_variety %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">
+          <%= form.label :country, "Origin *" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.country_select :country, {}, class: "form-control", id: :listing_country %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">      
+          <%= form.label :region, "Region" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :region, id: :listing_region, class: "form-control", placeholder: "Which region produced this coffee?" %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">      
+          <%= form.label :producer, "Producer" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :producer, id: :listing_producer, class: "form-control", placeholder: "Name of coffee bean producer" %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">      
+          <%= form.label :notes, "Notes *" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :notes, id: :listing_notes, class: "form-control", placeholder: "e.g. chocolate, citrus..." %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">
+          <%= form.label :roast, "Roast *" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.select :roast, options_for_select(["Light", "Medium", "Medium-Dark", "Dark", "Green"], selected: @listing.roast), {}, class: "form-control", id: :listing_roast %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">
+          <%= form.label :grind, "Griding available? *" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.select :grind, options_for_select([['Yes', true], ['No', false]], {:selected => @listing.grind}), {}, class: "form-control", id: :listing_grind %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">  
+          <%= form.label :weight %>
+          <small class="form-text text-muted">Please enter the weight in grams.</small>
+        </div>
+        <div class="col-md-8">
+          <%= form.number_field :weight, id: :listing_weight, class: "form-control" %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">  
+          <%= form.label :roast_date, 'Roast Date *' %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :roast_date, :data => {:provide => 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-autoclose' => 'true'}, class: 'form-control', placeholder: 'YYYY-MM-DD', id: :listing_roast_date %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">      
+          <%= form.label :about, "About product *" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_area :about, rows: 5, id: :store_about, class: "form-control", placeholder: "Tell people about your roast! Why should they buy it?" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">  
+          <%= form.label :price_cents, "Price" %>
+          <small class="form-text text-muted">Australian dollars ($)</small>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :price_cents, id: :listing_price_cents, class: "form-control", placeholder: "e.g. 15.00" %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">  
+          <%= form.label :shipping_cents, "Shipping fee" %>
+          <small class="form-text text-muted">Please select a flat fee for shipping to customers - Australian dollars ($)</small>
+        </div>
+        <div class="col-md-8">
+          <%= form.text_field :shipping_cents, id: :listing_shipping_cents, class: "form-control", placeholder: "e.g. 5.00" %>
+        </div>
+      </div> 
+      
+      <br />
+      
+      <% if @listing.product_image_data? %>
+        <div class="row">
+          <div class="control-label col-md-2 offset-md-1"> 
+            <p>Current product image</p>
+            <small class="form-text text-muted">Upload a new image to replace this one.</small>
+          </div>
+          <div class="col-md-8">
+            <%= image_tag @listing.product_image_url(:thumb) %>
+          </div>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+    
+      <br />
+      
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">    
+          <%= form.label :product_image, "Upload a product image" %>
+        </div>
+        <div class="col-md-8">
+          <%= form.file_field :product_image, id: :listing_product_image %>
+        </div>
+      </div>
+      <div class = "form-group">
+        <div class = "offset-md-3 col-md-10">
+          <%= form.submit "Submit", class: "btn btn-primary btn-lg btn-xlarge"  %>
+        </div>
+      </div>      
+ 
+      
+    <% end %>
 
-  <div class="field">
-    <%= form.label :store_id %>
-    <%= form.text_field :store_id, id: :listing_store_id %>
   </div>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :listing_title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :variety %>
-    <%= form.text_field :variety, id: :listing_variety %>
-  </div>
-
-  <div class="field">
-    <%= form.label :countryregion %>
-    <%= form.text_field :countryregion, id: :listing_countryregion %>
-  </div>
-
-  <div class="field">
-    <%= form.label :producer %>
-    <%= form.text_field :producer, id: :listing_producer %>
-  </div>
-
-  <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_field :notes, id: :listing_notes %>
-  </div>
-
-  <div class="field">
-    <%= form.label :roast %>
-    <%= form.text_field :roast, id: :listing_roast %>
-  </div>
-
-  <div class="field">
-    <%= form.label :grind %>
-    <%= form.check_box :grind, id: :listing_grind %>
-  </div>
-
-  <div class="field">
-    <%= form.label :weight %>
-    <%= form.number_field :weight, id: :listing_weight %>
-  </div>
-
-  <div class="field">
-    <%= form.label :roast_date %>
-    <%= form.date_select :roast_date, id: :listing_roast_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :about %>
-    <%= form.text_area :about, id: :listing_about %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price, id: :listing_price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :shipping %>
-    <%= form.number_field :shipping, id: :listing_shipping %>
-  </div>
-
-  <div class="field">
-    <%= form.label :product_image_data %>
-    <%= form.text_area :product_image_data, id: :listing_product_image_data %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

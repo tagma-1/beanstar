@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
 
   # GET /listings
   # GET /listings.json
@@ -10,6 +11,7 @@ class ListingsController < ApplicationController
   # GET /listings/1
   # GET /listings/1.json
   def show
+    @total_price = @listing.price + @listing.shipping
   end
 
   # GET /listings/new
@@ -19,13 +21,17 @@ class ListingsController < ApplicationController
 
   # GET /listings/1/edit
   def edit
+    authorize @listing
   end
 
   # POST /listings
   # POST /listings.json
   def create
     @listing = Listing.new(listing_params)
-
+    @listing.store = current_user.store
+    @listing.price_cents = listing_params[:price_cents].gsub(/[\D]/, '')
+    @listing.shipping_cents = listing_params[:shipping_cents].gsub(/[\D]/, '')
+    
     respond_to do |format|
       if @listing.save
         format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
@@ -40,6 +46,8 @@ class ListingsController < ApplicationController
   # PATCH/PUT /listings/1
   # PATCH/PUT /listings/1.json
   def update
+    authorize @listing
+    
     respond_to do |format|
       if @listing.update(listing_params)
         format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }
@@ -54,6 +62,9 @@ class ListingsController < ApplicationController
   # DELETE /listings/1
   # DELETE /listings/1.json
   def destroy
+    
+    authorize @listing
+    
     @listing.destroy
     respond_to do |format|
       format.html { redirect_to listings_url, notice: 'Listing was successfully destroyed.' }
@@ -69,6 +80,7 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:store_id, :title, :variety, :countryregion, :producer, :notes, :roast, :grind, :weight, :roast_date, :about, :price, :shipping, :product_image_data)
+      params.require(:listing).permit(:title, :variety, :country, :region, :producer, :notes, :roast, :grind, :weight, :roast_date, :about, :product_image, :price_cents, :shipping_cents)
     end
+    
 end
