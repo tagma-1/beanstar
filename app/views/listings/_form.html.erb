@@ -1,0 +1,87 @@
+<%= form_with(model: listing, local: true) do |form| %>
+  <% if listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+      <ul>
+      <% listing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :store_id %>
+    <%= form.text_field :store_id, id: :listing_store_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :listing_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :variety %>
+    <%= form.text_field :variety, id: :listing_variety %>
+  </div>
+
+  <div class="field">
+    <%= form.label :countryregion %>
+    <%= form.text_field :countryregion, id: :listing_countryregion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :producer %>
+    <%= form.text_field :producer, id: :listing_producer %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_field :notes, id: :listing_notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :roast %>
+    <%= form.text_field :roast, id: :listing_roast %>
+  </div>
+
+  <div class="field">
+    <%= form.label :grind %>
+    <%= form.check_box :grind, id: :listing_grind %>
+  </div>
+
+  <div class="field">
+    <%= form.label :weight %>
+    <%= form.number_field :weight, id: :listing_weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :roast_date %>
+    <%= form.date_select :roast_date, id: :listing_roast_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :about %>
+    <%= form.text_area :about, id: :listing_about %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, id: :listing_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shipping %>
+    <%= form.number_field :shipping, id: :listing_shipping %>
+  </div>
+
+  <div class="field">
+    <%= form.label :product_image_data %>
+    <%= form.text_area :product_image_data, id: :listing_product_image_data %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
