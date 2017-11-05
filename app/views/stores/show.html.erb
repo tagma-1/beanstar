@@ -65,15 +65,9 @@
     
     <br />
     
-    <div align="center">
-      <%= link_to 'My products', root_path, class: "btn btn-primary btn-lg" %>
-    </div>
-    
-    <br />
-    
-    <div align="center">
-      <%= link_to 'Add product', root_path, class: "btn btn-primary btn-lg" %>
-    </div>
+    <p align="center">
+      <%= link_to 'My products', listings_path(id: @store.id), class: "btn btn-primary btn-lg" %>  <%= link_to 'Add product', new_listing_path, class: "btn btn-primary btn-lg" %>
+    </p>
 
   </div>
   
@@ -91,15 +85,24 @@
     <br />
     
     <% if @store.image %>
-      <div class="row">
-        <div class="col-md-4 offset-md-4 center">
-          <%= image_tag @store.image_url(:thumb) %>
-        </div>
+      <div align="center">
+        <%= image_tag @store.image_url(:thumb) %>
+      </div>
+    <% else %>
+      <div align="center">
+        <%= image_tag("roasting.jpg", height: "300", width: "450") %>
       </div>
     <% end %>
     
     <br />
 
+    <% if user_signed_in? %>
+      <p align="center">
+        <%= link_to 'Message store', root_path, class: "btn btn-primary btn-md btn-xlarge" %>  
+    <% end %>
+        <%= link_to 'View products', listings_path(id: @store.id), class: "btn btn-primary btn-md btn-xlarge" %>
+      </p>
+      
     <table align="center">
       <thead>
         <tr>
@@ -138,17 +141,6 @@
     
     <br />
     
-    <% if user_signed_in? %>
-      <div align="center">
-        <%= link_to 'Message store', root_path, class: "btn btn-primary btn-lg" %>
-      </div>
-      
-      <br />
-      
-      <div align="center">
-        <%= link_to 'View products', root_path, class: "btn btn-primary btn-lg" %>
-      </div>
-    <% end %>
 
   </div>
 <% end %>

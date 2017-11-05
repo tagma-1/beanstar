@@ -1,47 +1,32 @@
-<p id="notice"><%= notice %></p>
+<%= render 'shared/page_title', title: "Roasters" %>
 
-<h1>Stores</h1>
+<!-- pagination -->
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Name</th>
-      <th>Image</th>
-      <th>Address</th>
-      <th>Suburb</th>
-      <th>State</th>
-      <th>Postcode</th>
-      <th>About</th>
-      <th>Roasting schedule</th>
-      <th>Next roast</th>
-      <th>Pickup</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= will_paginate @posts, :page_links => false, class: 'center' %>
 
-  <tbody>
-    <% @stores.each do |store| %>
-      <tr>
-        <td><%= store.user %></td>
-        <td><%= store.name %></td>
-        <td><%= image_tag @store.image_url(:original) %></td>
-        <td><%= store.address %></td>
-        <td><%= store.suburb %></td>
-        <td><%= store.state %></td>
-        <td><%= store.postcode %></td>
-        <td><%= store.about %></td>
-        <td><%= store.roasting_schedule %></td>
-        <td><%= store.next_roast %></td>
-        <td><%= store.pickup %></td>
-        <td><%= link_to 'Show', store %></td>
-        <td><%= link_to 'Edit', edit_store_path(store) %></td>
-        <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<br />
+ 
 
-<br>
-
-<%= link_to 'New Store', new_store_path %>
+<div class="container" align="center">
+  <div class="card-deck container">
+  <% @stores.each do |store| %>
+  
+    <div class="card mt-4">
+      <% if store.image %>
+        <%= image_tag store.image_url(:original), class: "card-img-top", alt: "No product image available.", height: '180', width: '318' %> 
+      <% else %>
+        <%= image_tag("roasting.jpg", height: '180', width: '318', class: "card-img-top") %>
+      <% end %>
+      <div class="card-body">
+        <h4 class="card-title"><%= store.name %></h4>
+        <p class="card-text"><strong>Roasting in:</strong> <%= store.state %></p>
+        <p class="card-text"><strong>Average rating:</strong> | <strong>Followers:</strong></p>
+        <p><%= link_to "View store", store_path(store), class: "btn btn-primary btn-xlarge" %> </p>
+      </div>
+    </div>
+    
+    <br />
+    
+  <% end %>
+  </div>
+</div>

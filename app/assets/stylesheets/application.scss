@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "bootstrap-datepicker3";
 
 /* Global font to customise appearance */
 body {
@@ -70,6 +71,10 @@ h1 {
   padding-right: 2em;
 }
 
+.btn-danger {
+  border-color: #FFF;
+}
+
 .btn-xlarge:hover {
   background-color: #562300;
   text-decoration: none;
@@ -107,3 +112,16 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+.card {
+  background-color: #ACB994;
+  min-width: 318px;
+  min-height: 180px;
+  max-width: 30%;
+}
+
+.card-title a {
+  color: inherit;
+}
+
+

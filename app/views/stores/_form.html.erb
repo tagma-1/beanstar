@@ -46,7 +46,7 @@
           <%= form.label :state, "State *" %>
         </div>
         <div class="col-md-8">
-          <%= form.select :state, options_for_select(["VIC", "NSW", "QLD", "SA", "WA", "NT", "TAS", "ACT"], selected: @store.state), {}, class: "form-control", id: :store_state %>
+          <%= form.select :state, options_for_select([ ["Vic", "Victoria"], [ "NSW", "New South Wales"], [ "QLD", "Queensland"], [ "SA", "South Australia"], [ "WA", "Western Australia" ], [ "NT", "Northern Territory" ], [ "TAS", "Tasmania" ], ["ACT", "Australian Capital Territory" ] ], selected: @store.state), {}, class: "form-control", id: :store_state %>
         </div>
       </div>
 

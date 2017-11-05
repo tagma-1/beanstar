@@ -1,0 +1,238 @@
+<% if user_signed_in? && @listing.store.user_id == current_user.id %>
+  
+  <%= render 'shared/page_title', title: "Product listing" %>
+  
+  <div class="container">
+    
+    <div align="center">
+      <h3 class="underline"><%= @listing.title %></h3>
+    </div>
+    
+    
+    <br />
+    
+    <% if @listing.product_image %>
+      <div align="center">
+        <%= image_tag @listing.product_image_url(:thumb) %>
+      </div>
+    <% else %>
+      <div align="center">
+        <p> You have not selected an image for this product. <%= link_to "Click here to add one.", edit_listing_path(@listing) %>
+      </div>
+    <% end %>
+    
+    <br />
+    
+    <p align="center">
+        <%= link_to 'Edit product', edit_listing_path(@listing), class: "btn btn-primary btn-md btn-xlarge" %> 
+        <%= link_to "Delete product", listings_path(@listing), class: "btn btn-danger btn-md", data: { confirm: "Are you sure?" }, method: :delete %>
+    </p>
+    
+    <br />
+    
+    <table align="center">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><strong>Variety</strong></td>
+          <td><%= @listing.variety %></td>        
+        </tr>
+        
+        <tr>
+          <td><strong>Origin</strong></td>
+          <td><%= @listing.country_name %></td>        
+        </tr>
+        
+        <% if @listing.region %>
+          <tr>
+            <td><strong>Region</strong></td>
+            <td><%= @listing.region %></td>        
+          </tr>
+        <% end %>
+        
+        <% if @listing.producer %>
+          <tr>
+            <td><strong>Producer</strong></td>
+            <td><%= @listing.producer %></td>        
+          </tr>
+        <% end %>
+        
+        <% if @listing.notes %>
+          <tr>
+            <td><strong>Notes</strong></td>
+            <td><%= @listing.notes %></td>        
+          </tr>
+        <% end %>
+        
+        <tr>
+          <td><strong>Weight</strong></td>
+          <td><%= @listing.weight %> grams</td>        
+        </tr>
+        
+        <tr>
+          <td><strong>Date roasted</strong></td>
+          <td><%= @listing.roast_date %></td>        
+        </tr>
+        
+        <tr>
+          <td><strong>About:</strong></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= @listing.about %></td>        
+        </tr>
+        
+        <tr>
+          <td><strong>Price</strong></td>
+          <td>$<%= @listing.price %></td>        
+        </tr>
+        
+        <tr>
+          <td><strong>Shipping</strong></td>
+          <td>$<%= @listing.shipping %></td>        
+        </tr>
+        
+        <tr>
+          <td><strong>Total Price</strong></td>
+          <td>$<%= @total_price %></td>        
+        </tr>
+        
+      </tbody>
+    </table>
+
+    <br />
+    
+    <div align="center">
+      <%= link_to 'Back to my store', store_path(@listing.store), class: "btn btn-primary btn-lg btn-xlarge" %>
+    </div>
+
+  </div>
+  
+<% else %>
+
+  <%= render 'shared/page_title', title: "#{@listing.title}" %>
+  
+  <div class="container">
+  
+    <br />
+    
+    <% if @listing.product_image %>
+      <div align="center">
+        <%= image_tag @listing.product_image_url(:thumb) %>
+      </div>
+    <% else %>
+      <div align="center">
+        <%= image_tag("coffee_1.jpg", height: "300", width: "450") %>
+      </div>
+    <% end %>
+    
+    <br />
+    
+    <p align="center">
+      <%= link_to "Message seller", root_path, class: "btn btn-primary btn-md btn-xlarge" %> 
+      <%= link_to "Other seller roasts", listings_path(id: @listing.store.id), class: "btn btn-primary btn-md btn-xlarge" %>
+    </p>
+
+    <table align="center">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><strong>Store</strong></td>
+          <td><%= link_to @listing.store.name, store_path(@listing.store) %></td>        
+        </tr>
+        
+        <tr>
+          <td><strong>Variety</strong></td>
+          <td><%= @listing.variety %></td>        
+        </tr>
+        
+        <tr>
+          <td><strong>Origin</strong></td>
+          <td><%= @listing.country_name %></td>        
+        </tr>
+        
+        <% if @listing.region %>
+          <tr>
+            <td><strong>Region</strong></td>
+            <td><%= @listing.region %></td>        
+          </tr>
+        <% end %>
+        
+        <% if @listing.producer %>
+          <tr>
+            <td><strong>Producer</strong></td>
+            <td><%= @listing.producer %></td>        
+          </tr>
+        <% end %>
+        
+        <% if @listing.notes %>
+          <tr>
+            <td><strong>Notes</strong></td>
+            <td><%= @listing.notes %></td>        
+          </tr>
+        <% end %>
+        
+        <tr>
+          <td><strong>Weight</strong></td>
+          <td><%= @listing.weight %> grams</td>        
+        </tr>
+        
+        <tr>
+          <td><strong>Date roasted</strong></td>
+          <td><%= @listing.roast_date %></td>        
+        </tr>
+        
+        <tr>
+          <td><strong>About:</strong></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= @listing.about %></td>        
+        </tr>
+        
+        <tr>
+          <td><strong>Price</strong></td>
+          <td>$<%= @listing.price %></td>        
+        </tr>
+        
+        <tr>
+          <td><strong>Shipping</strong></td>
+          <td>$<%= @listing.shipping %></td>        
+        </tr>
+        
+        <tr>
+          <td><strong>Total Price</strong></td>
+          <td>$<%= @total_price %></td>        
+        </tr>
+        
+      </tbody>
+    </table>    
+    <br />
+    
+    <% if user_signed_in? %>
+      <div align="center">
+        <%= link_to 'Buy Now', root_path, class: "btn btn-primary btn-lg btn-xlarge" %>
+      </div>
+
+    <% else %>
+    
+      <div align="center">
+        <%= link_to 'Sign in to buy!', new_user_session_path, class: "btn btn-primary btn-lg" %>
+      </div>
+    
+    <% end %>
+
+  </div>
+<% end %>

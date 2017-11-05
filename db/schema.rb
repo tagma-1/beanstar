@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102223228) do
+ActiveRecord::Schema.define(version: 20171104024835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "listings", force: :cascade do |t|
+    t.bigint "store_id"
+    t.string "title"
+    t.string "variety"
+    t.string "country"
+    t.string "region"
+    t.string "producer"
+    t.string "notes"
+    t.string "roast"
+    t.boolean "grind"
+    t.integer "weight"
+    t.date "roast_date"
+    t.text "about"
+    t.integer "price_cents"
+    t.integer "shipping_cents"
+    t.text "product_image_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_listings_on_store_id"
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id"
@@ -60,6 +81,7 @@ ActiveRecord::Schema.define(version: 20171102223228) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "listings", "stores"
   add_foreign_key "profiles", "users"
   add_foreign_key "stores", "users"
 end
