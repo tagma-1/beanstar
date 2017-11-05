@@ -1,0 +1,34 @@
+<%= render 'shared/page_title', title: "Inbox" %>
+
+<div class="container" align="center">
+  <% @conversations.each do |conversation| %>
+  
+    <!-- check to see which conversations the current user is a member of, either as sender or recipient -->
+    
+    <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+      <div class="card bg-light mb-3" style="max-width: 80%;" align="left">
+        
+        <!-- display the profile name of the user who is not the current user-->
+        
+        <div class="card-header">
+          <strong>Chat with <%= conversation.sender_id == current_user.id ? User.find(conversation.recipient_id).profile.profile_name : User.find(conversation.sender_id).profile.profile_name %></strong>
+        </div>
+        <div class="card-body">
+          <p class="card-text conversation-truncate">
+            <%= link_to truncate(conversation.messages.last.content, length: 50), conversation_messages_path(conversation) %>
+          </p>
+          <p class="card-text">
+            <small class="red-delete">
+              <%= link_to "Delete", conversations_path(conversation), data: { confirm: "Are you sure?" }, method: :delete %>
+            </small> 
+            <small class="offset-md-9">
+              <%= conversation.messages.last.message_time %>
+            </small>
+          </p>
+        </div>
+      </div>
+    <% else %>
+      <h4 align="center">Your inbox is empty.</h4>
+    <% end %>
+  <% end %>
+</div>

@@ -98,9 +98,9 @@
 
     <% if user_signed_in? %>
       <p align="center">
-        <%= link_to 'Message store', root_path, class: "btn btn-primary btn-md btn-xlarge" %>  
+        <%= link_to 'Message store', conversations_path(sender_id: current_user.id, recipient_id: @store.user), method: :post, class: "btn btn-primary btn-lg" %>  
     <% end %>
-        <%= link_to 'View products', listings_path(id: @store.id), class: "btn btn-primary btn-md btn-xlarge" %>
+        <%= link_to 'View products', listings_path(id: @store.id), class: "btn btn-primary btn-lg" %>
       </p>
       
     <table align="center">

@@ -12,7 +12,7 @@ class Listing < ApplicationRecord
   validates :roast_date, presence: true
   validates :price_cents, presence: true
   validates :shipping_cents, presence: true
-  validates :about, presence: true, length: {maximum: 400}
+  validates :about, presence: true, length: {maximum: 500}
               
   monetize :price_cents
   monetize :shipping_cents

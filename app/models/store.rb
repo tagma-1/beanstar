@@ -1,7 +1,7 @@
 class Store < ApplicationRecord
   include ImageUploader[:image]
   belongs_to :user
-  has_many :listing
+  has_many :listings, dependent: :destroy
   
   validates :name, presence: true
   validates :about, presence: true, length: {maximum: 400}
