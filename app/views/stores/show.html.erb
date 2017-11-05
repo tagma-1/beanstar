@@ -96,6 +96,13 @@
     
     <br />
 
+    <% if user_signed_in? %>
+      <p align="center">
+        <%= link_to 'Message store', root_path, class: "btn btn-primary btn-md btn-xlarge" %>  
+    <% end %>
+        <%= link_to 'View products', listings_path(id: @store.id), class: "btn btn-primary btn-md btn-xlarge" %>
+      </p>
+      
     <table align="center">
       <thead>
         <tr>
@@ -134,12 +141,6 @@
     
     <br />
     
-    <% if user_signed_in? %>
-      <p align="center">
-        <%= link_to 'Message store', root_path, class: "btn btn-primary btn-lg" %>  
-    <% end %>
-        <%= link_to 'View products', listings_path(id: @store.id), class: "btn btn-primary btn-lg" %>
-      </p>
 
   </div>
 <% end %>
