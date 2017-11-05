@@ -111,4 +111,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .card {
   background-color: #ACB994;
+  min-width: 318px;
+  min-height: 180px;
+  max-width: 30%;
 }

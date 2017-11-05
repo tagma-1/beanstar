@@ -1,38 +1,49 @@
-<%= render 'shared/page_title', title: "Beans" %>
-
+<!-- are there any listings to display? -->
 <% if @listings.any? %>
-
-  <!-- pagination -->
-  <%= will_paginate @posts, :page_links => false, class: 'center' %>
+ 
+    <%= render 'shared/page_title', title: "Beans" %>
   
-  <br />
-   
-  
-  <div class="container" align="center">
-    <div class="card-deck">
-    <% @listings.each do |listing| %>
+    <!-- pagination -->
+    <%= will_paginate @posts, :page_links => false, class: 'center' %>
     
-      <div class="card" style="width: 20rem;" align="center">
-        <% if listing.product_image %>
-          <%= image_tag listing.product_image_url(:original), class: "card-img-top", alt: "No product image available.", height: '180', width: '318' %> 
-        <% else %>
-          <%= image_tag("coffee_1.jpg", height: '180', width: '318', class: "card-img-top") %>
-        <% end %>
-        <div class="card-body">
-          <h4 class="card-title"><%= listing.title %></h4>
-          <p class="card-text"><strong>Roasted by:</strong> <%= listing.store.name %></p>
-          <p class="card-text">$<%= listing.price %></p>
-          <p><%= link_to "View product", listing_path(listing), class: "btn btn-primary btn-xlarge" %> </p>
+    <br />
+     
+    
+    <div class="container" align="center">
+      <div class="card-deck container">
+      <% @listings.each do |listing| %>
+      
+        <div class="card">
+          <% if listing.product_image %>
+            <%= image_tag listing.product_image_url(:original), class: "card-img-top", alt: "No product image available.", height: '180', width: '318' %> 
+          <% else %>
+            <%= image_tag("coffee_1.jpg", height: '180', width: '318', class: "card-img-top") %>
+          <% end %>
+          <div class="card-body">
+            <h4 class="card-title"><%= listing.title %></h4>
+            <p class="card-text"><strong>Roasted by:</strong> <%= listing.store.name %></p>
+            <p class="card-text">$<%= listing.price %></p>
+            
+          <!-- displays different options if the product is owned by the logged in store/user -->
+          <% if user_signed_in? && listing.store.user == current_user %>
+            <p><%= link_to "Edit product", edit_listing_path(listing), class: "btn btn-primary btn-sm btn-xlarge" %> <%= button_to "Delete product", listings_path(@listing), class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" }, method: :delete %> </p>
+          <% else %>
+            <p><%= link_to "View product", listing_path(listing), class: "btn btn-primary btn-xlarge" %> </p>
+          <% end %>
+          
+          </div>
         </div>
+        
+        <br />
+        
+      <% end %>
       </div>
-      
-      <br />
-      
-    <% end %>
     </div>
-  </div>
 
+<!-- Are there no products to display for this user/store? -->
 <% else %>
+  
+  <%= render 'shared/page_title', title: "#{Store.find(params[:id]).name}'s Products" %>
   
   <br />
 

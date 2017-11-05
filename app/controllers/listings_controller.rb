@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
   # GET /listings.json
   def index
     if params[:id]
-      @listings = Listing.where(store_id: :id).paginate(page: params[:page], per_page: 6)
+      @listings = Listing.where(store_id: params[:id]).paginate(page: params[:page], per_page: 6)
     else
       @listings = Listing.all.paginate(page: params[:page], per_page: 6)
     end
