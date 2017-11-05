@@ -25,10 +25,16 @@
     
     <br />
     
-    <div align="center">
-      <%= link_to 'Edit product', edit_listing_path(@listing), class: "btn btn-primary btn-lg btn-xlarge" %>
+    <div class="row col-md-12">
+      <div class="col-md-2 offset-md-3">
+        <%= link_to 'Edit product', edit_listing_path(@listing), class: "btn btn-primary btn-lg btn-xlarge" %>
+      </div>
+      
+      <div class="col-md-2 offset-md-2">
+        <%= link_to 'My store', store_path(@listing.store), class: "btn btn-primary btn-lg btn-xlarge" %>
+      </div>
     </div>
-  
+    
     <br />
     
     <table align="center">
@@ -107,12 +113,6 @@
       </tbody>
     </table>
 
-    <br />
-    
-    <div align="center">
-      <%= link_to 'My store', store_path(@listing.store), class: "btn btn-primary btn-md" %>
-    </div>
-    
     <br />
     
     <div align="center">

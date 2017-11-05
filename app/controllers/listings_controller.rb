@@ -5,7 +5,7 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @listings = Listing.all
+    @listings = Listing.all.paginate(page: params[:page], per_page: 7)
   end
 
   # GET /listings/1
@@ -29,6 +29,8 @@ class ListingsController < ApplicationController
   def create
     @listing = Listing.new(listing_params)
     @listing.store = current_user.store
+    
+    #Accepts user input as a string, removes non-digit characters and saves to database as an integer representing the total in cents
     @listing.price_cents = listing_params[:price_cents].gsub(/[\D]/, '')
     @listing.shipping_cents = listing_params[:shipping_cents].gsub(/[\D]/, '')
     

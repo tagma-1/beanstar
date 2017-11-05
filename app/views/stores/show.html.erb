@@ -91,10 +91,12 @@
     <br />
     
     <% if @store.image %>
-      <div class="row">
-        <div class="col-md-4 offset-md-4 center">
-          <%= image_tag @store.image_url(:thumb) %>
-        </div>
+      <div align="center">
+        <%= image_tag @store.image_url(:thumb) %>
+      </div>
+    <% else %>
+      <div align="center">
+        <%= image_tag("roasting.jpg", height: "300", width: "450") %>
       </div>
     <% end %>
     
