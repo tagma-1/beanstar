@@ -12,10 +12,8 @@
     <br />
     
     <% if @listing.product_image %>
-      <div class="row">
-        <div class="col-md-4 offset-md-4 center">
-          <%= image_tag @listing.product_image_url(:thumb) %>
-        </div>
+      <div align="center">
+        <%= image_tag @listing.product_image_url(:thumb) %>
       </div>
     <% else %>
       <div align="center">
@@ -25,15 +23,10 @@
     
     <br />
     
-    <div class="row col-md-12">
-      <div class="col-md-2 offset-md-3">
-        <%= link_to 'Edit product', edit_listing_path(@listing), class: "btn btn-primary btn-lg btn-xlarge" %>
-      </div>
-      
-      <div class="col-md-2 offset-md-2">
-        <%= link_to 'My store', store_path(@listing.store), class: "btn btn-primary btn-lg btn-xlarge" %>
-      </div>
-    </div>
+    <p align="center">
+        <%= link_to 'Edit product', edit_listing_path(@listing), class: "btn btn-primary btn-md btn-xlarge" %> 
+        <%= link_to "Delete product", listings_path(@listing), class: "btn btn-danger btn-md", data: { confirm: "Are you sure?" }, method: :delete %>
+    </p>
     
     <br />
     
@@ -116,7 +109,7 @@
     <br />
     
     <div align="center">
-      <%= button_to "Delete product", listings_path(@listing), class: "btn btn-danger btn-lg", data: { confirm: "Are you sure?" }, method: :delete %>
+      <%= link_to 'Back to my store', store_path(@listing.store), class: "btn btn-primary btn-lg btn-xlarge" %>
     </div>
 
   </div>
@@ -130,14 +123,21 @@
     <br />
     
     <% if @listing.product_image %>
-      <div class="row">
-        <div class="col-md-4 offset-md-4 center">
-          <%= image_tag @listing.product_image_url(:thumb) %>
-        </div>
+      <div align="center">
+        <%= image_tag @listing.product_image_url(:thumb) %>
+      </div>
+    <% else %>
+      <div align="center">
+        <%= image_tag("coffee_1.jpg", height: "300", width: "450") %>
       </div>
     <% end %>
     
     <br />
+    
+    <p align="center">
+      <%= link_to "Message seller", root_path, class: "btn btn-primary btn-md btn-xlarge" %> 
+      <%= link_to "Other seller roasts", listings_path(id: @listing.store.id), class: "btn btn-primary btn-md btn-xlarge" %>
+    </p>
 
     <table align="center">
       <thead>
@@ -147,6 +147,11 @@
         </tr>
       </thead>
       <tbody>
+        
+        <tr>
+          <td><strong>Store</strong></td>
+          <td><%= link_to @listing.store.name, store_path(@listing.store) %></td>        
+        </tr>
         
         <tr>
           <td><strong>Variety</strong></td>
@@ -220,19 +225,7 @@
       <div align="center">
         <%= link_to 'Buy Now', root_path, class: "btn btn-primary btn-lg btn-xlarge" %>
       </div>
-      
-      <br />
-      
-      <div align="center">
-        <%= link_to 'Message', root_path, class: "btn btn-primary btn-md" %>
-      </div>
-      
-      <br />
-      
-      <div align="center">
-        <%= link_to 'View store', store_path(@listing.store), class: "btn btn-primary btn-md" %>
-      </div>
-    
+
     <% else %>
     
       <div align="center">

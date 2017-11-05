@@ -71,6 +71,10 @@ h1 {
   padding-right: 2em;
 }
 
+.btn-danger {
+  border-color: #FFF;
+}
+
 .btn-xlarge:hover {
   background-color: #562300;
   text-decoration: none;
@@ -115,3 +119,9 @@ input[type=number]::-webkit-outer-spin-button {
   min-height: 180px;
   max-width: 30%;
 }
+
+.card-title a {
+  color: inherit;
+}
+
+

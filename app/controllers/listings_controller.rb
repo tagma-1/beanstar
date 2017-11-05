@@ -35,9 +35,9 @@ class ListingsController < ApplicationController
     @listing.store = current_user.store
     
     #Accepts user input as a string, removes non-digit characters and saves to database as an integer representing the total in cents
-    @listing.price_cents = listing_params[:price_cents].gsub(/[\D]/, '')
-    @listing.shipping_cents = listing_params[:shipping_cents].gsub(/[\D]/, '')
-    
+    @listing.price_cents = listing_params[:price_cents].gsub(/[\D]/, '').to_i
+    @listing.shipping_cents = listing_params[:shipping_cents].gsub(/[\D]/, '').to_i
+
     respond_to do |format|
       if @listing.save
         format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
