@@ -1,0 +1,62 @@
+<%= render 'shared/page_title', title: "Inbox" %>
+
+<div class="container" align="center">
+
+  <table class="table table-hover inbox-desktop">
+    <thead class="thead-dark">
+      <th>Chat With</th>
+      <th>Last Message</th>
+      <th>Received</th>
+    </thead>
+
+  <% @conversations.each do |conversation| %>
+        
+      <!-- check to see which conversations the current user is a member of, either as sender or recipient -->
+      <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+    
+        <tbody>
+          <td><%= conversation.sender_id == current_user.id ? User.find(conversation.recipient_id).profile.profile_name : User.find(conversation.sender_id).profile.profile_name %></td>
+          <td>
+            <% if conversation.messages.last %> 
+              <%= link_to truncate(conversation.messages.last.content, length: 200), conversation_messages_path(conversation) %>
+            <% else %>
+              No messages to display.
+            <% end %>
+          </td>
+          <td>
+            <% if conversation.messages.last %>
+              <%= conversation.messages.last.message_time %>
+            <% else %>
+              <%= link_to 'Send message', conversation_messages_path(conversation), class: "btn btn-primary btn-sm" %>
+            <% end %>
+          </td>
+        </tbody>
+      
+        <!-- bootstrap cards display for the inbox using media queries -->
+        <div class="card mb-3 inbox-mobile" style="max-width: 80%;" align="left">
+          <div class="card-header">
+            <strong>Chat with <%= conversation.sender_id == current_user.id ? User.find(conversation.recipient_id).profile.profile_name : User.find(conversation.sender_id).profile.profile_name %></strong>
+          </div>
+          <div class="card-body">
+            <p class="card-text conversation-truncate">
+              <% if conversation.messages.last %> 
+                <%= link_to truncate(conversation.messages.last.content, length: 125), conversation_messages_path(conversation) %>
+              <% else %>
+                No messages to display.
+              <% end %>
+            </p>
+            <p class="card-text center">
+              <small>
+                <% if conversation.messages.last %>
+                  <%= conversation.messages.last.message_time %>
+                <% else %>
+                  <%= link_to 'Send message', conversation_messages_path(conversation), class: "btn btn-primary btn-sm" %>
+                <% end %>
+              </small>
+            </p>
+          </div>
+        </div>
+      <% end %>
+  <% end %>
+  </table>
+</div>

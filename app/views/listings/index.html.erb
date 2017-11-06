@@ -13,7 +13,8 @@
       <div class="card-deck container">
       <% @listings.each do |listing| %>
       
-        <div class="card mt-4">
+        <div class="card card-listings mt-4">
+          <!-- Display the product photo, or a default photo if there isn't one -->
           <% if listing.product_image %>
             <%= image_tag listing.product_image_url(:original), class: "card-img-top", alt: "No product image available.", height: '180', width: '318' %> 
           <% else %>
@@ -40,7 +41,7 @@
       </div>
     </div>
 
-<!-- Are there no products to display for this user/store? -->
+<!-- If there are no products to display for this user/store -->
 <% else %>
   
   <%= render 'shared/page_title', title: "#{Store.find(params[:id]).name}'s Products" %>

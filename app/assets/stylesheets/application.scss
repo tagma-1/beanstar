@@ -103,17 +103,17 @@ table {
 }
 
 /* disables input number field arrows */
-input[type=number] {
-    -moz-appearance:textfield;
-}
+  input[type=number] {
+      -moz-appearance:textfield;
+  }
+  
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.card {
+.card-listings, .card-stores {
   background-color: #ACB994;
   min-width: 318px;
   min-height: 180px;
@@ -124,4 +124,39 @@ input[type=number]::-webkit-outer-spin-button {
   color: inherit;
 }
 
+.red-delete {
+  color: red;
+}
 
+.red-delete:hover {
+  color: red;
+  text-decoration: underline;
+}
+
+.message-card {
+  max-width: 60%;
+}
+
+@media screen and (max-width: 800px) {
+  
+  .inbox-desktop {
+    display: none;
+  }
+  
+  .message-card {
+    max-width: 70%;
+  }
+
+}
+
+@media screen and (min-width: 800px) {
+  
+  .inbox-mobile {
+    display: none;
+  }
+  
+  .message-card {
+    max-width: 60%;
+  }
+  
+}

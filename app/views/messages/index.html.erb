@@ -1,0 +1,57 @@
+<%= render 'shared/page_title', title: "Chat with #{other_party}" %>
+
+<div class="container">
+ 
+  <div align="center">
+    <% if @over_ten %>
+      <%= link_to "Show previous messages", "?m=all"%>
+    <% end %>
+  </div>
+ 
+  <div class="container">
+    <% @messages.each do |message| %>
+      <% if message.content %>
+      <% user = User.find(message.user_id) %>
+        <% if user != current_user %>
+          <div class="card message-card bg-light mt-4">
+            <div class="card-body">
+              <p class="card-text"><%= message.content %></p>
+              <p class="card-text"><small><%= message.message_time %><%= " (Store: #{user.store.name})" if user.store %></small></p>
+            </div>
+          </div>
+        <% else %>
+          <div align="right">
+            <div class="card message-card text-white bg-primary mt-4" align="left">
+              <div class="card-body">
+                <p class="card-text"><%= message.content %></p>
+                <p class="card-text"><small><%= message.message_time%></small></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+ 
+ <br />
+ <br />
+ 
+  <div class="col-md-12">
+    <%= form_for [@conversation, @message] do |f| %>
+      <div class="form-group" align="center">
+        <div class="col-md-8">
+          <%= f.text_area :content, class: "form-control", rows: 5, placeholder: "Enter your message here.", autofocus: true  %>
+        </div>
+      </div>
+      <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+      <br />
+      <div class="form-group">
+        <div align="center">
+          <%= f.submit "Send message", class: "btn btn-primary btn-lg btn-xlarge"  %>
+        </div>
+      </div>    
+    <% end %>
+  </div>
+  <br />
+ 
+</div> 

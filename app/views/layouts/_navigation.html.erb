@@ -33,7 +33,7 @@
             <% end %>
             
             <%= link_to 'My account', edit_user_registration_path, class: "dropdown-item" %>
-            <%= link_to 'Inbox', root_path, class: "dropdown-item" %>
+            <%= link_to 'Inbox', conversations_path, class: "dropdown-item" %>
             <div class="dropdown-divider"></div>
             <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>

@@ -16,7 +16,12 @@ class StoresController < ApplicationController
 
   # GET /stores/new
   def new
-    @store = Store.new
+    if current_user.profile
+      @store = Store.new
+    else
+      flash[:danger] = "You must create a profile before opening a store."
+      redirect_to new_profile_path
+    end
   end
 
   # GET /stores/1/edit
@@ -27,16 +32,19 @@ class StoresController < ApplicationController
   # POST /stores
   # POST /stores.json
   def create
-    @store = Store.new(store_params)
-    @store.user = current_user
-
-    respond_to do |format|
-      if @store.save
-        format.html { redirect_to @store, notice: 'Store was successfully created.' }
-        format.json { render :show, status: :created, location: @store }
-      else
-        format.html { render :new }
-        format.json { render json: @store.errors, status: :unprocessable_entity }
+    
+    if current_user.profile
+      @store = Store.new(store_params)
+      @store.user = current_user
+  
+      respond_to do |format|
+        if @store.save
+          format.html { redirect_to @store, notice: 'Store was successfully created.' }
+          format.json { render :show, status: :created, location: @store }
+        else
+          format.html { render :new }
+          format.json { render json: @store.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

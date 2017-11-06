@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
+  root "pages#home"
+  
+  resources :profiles
   resources :listings
   resources :stores
-  root "pages#home"
+  
+  resources :conversations do
+    resources :messages
+  end
+  
   
   #Devise controllers have been generated to allow for custom re-direction to create a profile on sign up. 
 
@@ -10,5 +17,4 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   
-  resources :profiles
 end
