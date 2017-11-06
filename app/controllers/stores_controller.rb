@@ -16,8 +16,11 @@ class StoresController < ApplicationController
 
   # GET /stores/new
   def new
-    if current_user.profile
+    if current_user.profile && current_user.store == nil
       @store = Store.new
+    elsif current_user.store
+      flash[:danger] = "You have already created a store."
+      redirect_to root_path
     else
       flash[:danger] = "You must create a profile before opening a store."
       redirect_to new_profile_path
@@ -33,7 +36,7 @@ class StoresController < ApplicationController
   # POST /stores.json
   def create
     
-    if current_user.profile
+    if current_user.store == nil
       @store = Store.new(store_params)
       @store.user = current_user
   
@@ -46,6 +49,9 @@ class StoresController < ApplicationController
           format.json { render json: @store.errors, status: :unprocessable_entity }
         end
       end
+    else
+      flash[:danger] = "You have already created a store."
+      redirect_to root_path
     end
   end
 

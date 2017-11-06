@@ -135,7 +135,9 @@
     <br />
     
     <p align="center">
-      <%= link_to "Message seller", conversations_path(sender_id: current_user.id, recipient_id: @listing.store.user), method: :post, class: "btn btn-primary btn-md btn-xlarge" %> 
+      <% if user_signed_in? %>
+        <%= link_to "Message seller", conversations_path(sender_id: current_user.id, recipient_id: @listing.store.user), method: :post, class: "btn btn-primary btn-md btn-xlarge" %>
+      <% end %>
       <%= link_to "Other seller roasts", listings_path(id: @listing.store.id), class: "btn btn-primary btn-md btn-xlarge" %>
     </p>
 
@@ -223,7 +225,7 @@
     
     <% if user_signed_in? %>
       <div align="center">
-        <%= link_to 'Buy Now', root_path, class: "btn btn-primary btn-lg btn-xlarge" %>
+        <%= link_to 'Buy Now', new_purchase_path(listing_id: @listing.id), class: "btn btn-primary btn-lg" %>
       </div>
 
     <% else %>

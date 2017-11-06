@@ -16,7 +16,12 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/new
   def new
-    @profile = Profile.new
+    if current_user.profile
+      flash[:danger] = "You have already created a profile."
+      redirect_to root_path
+    else
+      @profile = Profile.new
+    end
   end
 
   # GET /profiles/1/edit
@@ -27,16 +32,22 @@ class ProfilesController < ApplicationController
   # POST /profiles
   # POST /profiles.json
   def create
-    @profile = Profile.new(profile_params)
-    @profile.user = current_user
-
-    respond_to do |format|
-      if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
-        format.json { render :show, status: :created, location: @profile }
-      else
-        format.html { render :new }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
+    
+    if current_user.profile
+      flash[:danger] = "You have already created a profile."
+      redirect_to root_path
+    else    
+      @profile = Profile.new(profile_params)
+      @profile.user = current_user
+  
+      respond_to do |format|
+        if @profile.save
+          format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+          format.json { render :show, status: :created, location: @profile }
+        else
+          format.html { render :new }
+          format.json { render json: @profile.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

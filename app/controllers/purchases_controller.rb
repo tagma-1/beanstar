@@ -1,0 +1,65 @@
+class PurchasesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_purchase, only: [:new, :create]
+  
+  def index
+    #List the purchases made by the logged in user
+    @purchases = Listing.where(store: current_user.store)
+  end
+
+  def show
+  end
+
+  def new
+    @purchase.listing = Listing.find(params[:listing_id])
+    @amount = @purchase.listing.price_cents + @purchase.listing.shipping_cents 
+  end
+  
+  def create
+    
+    @purchase.listing = Listing.find(purchase_params[:listing_id])
+    
+    # Sets a boolean/address depending on whether the item will be picked up or needs shipping
+    @purchase.pickup = purchase_params[:pickup]
+    @purchase.address = [purchase_params[:address], purchase_params[:suburb], purchase_params[:state], purchase_params[:postcode]].join(', ')
+    
+    @purchase.user = current_user
+    
+    # Amount in cents
+    @amount = @purchase.listing.price_cents + @purchase.listing.shipping_cents 
+  
+    customer = Stripe::Customer.create(
+      :email => current_user.email,
+      :source  => params[:stripeToken]
+    )
+  
+    charge = Stripe::Charge.create(
+      :customer    => customer.id,
+      :amount      => @amount,
+      :description => "#{[@purchase.listing.title, @purchase.listing.weight].join(', ')} grams",
+      :currency    => 'aud'
+    )
+    
+    @purchase.charge_identifier = charge.id
+    @purchase.save
+    
+    flash[:success] = "Thank you! Your payment has been received. An email has been sent confirming receipt."
+    redirect_to root_path
+  
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to new_purchase_path(listing_id: @purchase.listing_id)
+  end
+  
+  private
+  
+
+  def set_purchase
+    @purchase = Purchase.new
+  end
+
+  def purchase_params
+    params.require(:purchase).permit(:listing_id, :pickup, :address, :suburb, :state, :postcode)
+  end
+  
+end
