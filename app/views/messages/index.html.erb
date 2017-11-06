@@ -1,33 +1,47 @@
 <%= render 'shared/page_title', title: "Chat with #{other_party}" %>
 
-<% if @over_ten %>
-  <%= link_to "Show Previous", "?m=all" %>
-<% end %>
-
-<div>
- <% @messages.each do |message| %>
-  <% if message.content %>
-   <% user = User.find(message.user_id) %>
-   <div class=”item”>
-    <div class=”content”>
-     <div class=”header”><strong><%= user.profile.profile_name %></strong>     <%= message.message_time %></div>
-      <div class=”list”>
-       <div class=”item”>
-        <i class=”right triangle icon”></i>
-         <%= message.content %>
-      </div>
+<div class="container">
+ 
+  <% if @over_ten %>
+    <%= link_to "Show Previous", "?m=all" %>
+  <% end %>
+ 
+  <div class="container">
+    <% @messages.each do |message| %>
+      <% if message.content %>
+      <% user = User.find(message.user_id) %>
+        <% if user != current_user %>
+          <div class="card message-card bg-light mt-3">
+            <div class="card-body">
+              <p class="card-text"><%= message.content %></p>
+              <p class="card-text"><small><%= message.message_time %></small></p>
+            </div>
+          </div>
+        <% else %>
+          <div align="right">
+            <div class="card message-card text-white bg-primary mt-3" align="left">
+              <div class="card-body">
+                <p class="card-text"><%= message.content %></p>
+                <p class="card-text"><small><%= message.message_time %></small></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+ </div>
+ 
+ <br />
+ <br />
+ 
+  <%= form_for [@conversation, @message] do |f| %>
+    <div class=”field”>
+      <%= f.text_area :content, class: "form-control" %>
     </div>
-   </div>
- </div>
+    <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+    <div>
+      <%= f.submit "Add Reply" %>
+    </div>
  <% end %>
-<% end %>
-</div>
-<%= form_for [@conversation, @message] do |f| %>
- <div class=”field”>
-   <%= f.text_area :content, class: "form-control" %>
- </div>
- <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
- <div>
-   <%= f.submit "Add Reply" %>
- </div>
-<% end %>
+ 
+</div> 
