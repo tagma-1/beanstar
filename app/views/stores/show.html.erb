@@ -96,12 +96,12 @@
     
     <br />
 
-    <% if user_signed_in? %>
-      <p align="center">
+    <p align="center">
+      <% if user_signed_in? %>
         <%= link_to 'Message store', conversations_path(sender_id: current_user.id, recipient_id: @store.user), method: :post, class: "btn btn-primary btn-md btn-xlarge" %>  
-    <% end %>
+      <% end %>
         <%= link_to 'View products', listings_path(id: @store.id), class: "btn btn-primary btn-md btn-xlarge" %>
-      </p>
+    </p>
       
     <table align="center">
       <thead>

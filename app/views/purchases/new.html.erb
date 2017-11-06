@@ -1,0 +1,117 @@
+<%= render 'shared/page_title', title: "Checkout" %>
+
+<div class="container">
+  <table class="table table-responsive-sm">
+    <thead class="thead-dark">
+      <th>Product</th>
+      <th>Price</th>
+      <th>Shipping</th>
+    </thead>
+    <tbody>
+      <td>
+        <strong><%= @purchase.listing.title %></strong></em>
+        <ul>
+          <li><small><strong>Size:</strong> <%= @purchase.listing.weight %> grams</small></li>
+          <li><small><strong>Variety:</strong> <%= @purchase.listing.variety %></small></li>
+          <li><small><strong>Origin:</strong> <%= @purchase.listing.country_name %></small></li>
+          <li><small><strong>Roast:</strong> <%= @purchase.listing.roast %></small></li>
+          <li><small><strong>Roasted on:</strong> <%= time_tag @purchase.listing.roast_date %></small></li>
+        </ul>
+      </td>
+      <td>A$<%= @purchase.listing.price %></td>
+      <td>A$<%= @purchase.listing.shipping %></td>
+    </tbody>
+  </table>
+  <div class="col-md-12">
+    <%= form_with(model: @purchase) do |f| %>
+      
+      <%= f.hidden_field :listing_id %>
+      
+      <!-- provides the option of pick-up rather than shipping if the seller has made this available -->
+      <% if @purchase.listing.store.pickup == true %>
+        <hr />
+        <div align="center">
+          <div class="card text-white bg-success mb-3" style="max-width: 80%">
+            <div class="card-header" align="center">  
+              <h5>Pickup is available for this item.</h5>
+            </div>
+            <div class="card-body" align="left">
+              <ul>
+                <li class="card-title">Seller address: <%= seller_address %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="form-group row">
+          <div class="control-label col-md-2 offset-md-1">
+            <%= f.label :pickup, "Would you like to collect this item from the seller yourself?" %>
+            <small class="form-text text-muted">If you select yes, the shipping charge listed above will not be applied and you do not need to complete your address below.</small>
+          </div>
+          <div class="col-md-8">
+            <%= f.select :pickup, options_for_select([['Yes', true], ['No', false]]), {}, class: "form-control", id: :purchase_pickup %>
+          </div>
+        </div>
+      <% end %>
+      <hr />
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">      
+          <%= f.label :address, "Shipping Address" %>
+        </div>
+        <div class="col-md-8">
+          <%= f.text_field :address, class: "form-control", placeholder: "e.g 123 Main Street" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">      
+          <%= f.label :suburb, "Suburb" %>
+        </div>
+        <div class="col-md-8">
+          <%= f.text_field :suburb, class: "form-control", placeholder: "Enter suburb" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">
+          <%= f.label :state, "State *" %>
+        </div>
+        <div class="col-md-8">
+          <%= f.select :state, options_for_select([ ["Vic", "Victoria"], [ "NSW", "New South Wales"], [ "QLD", "Queensland"], [ "SA", "South Australia"], [ "WA", "Western Australia" ], [ "NT", "Northern Territory" ], [ "TAS", "Tasmania" ], ["ACT", "Australian Capital Territory" ] ]), {}, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="control-label col-md-2 offset-md-1">  
+          <%= f.label :postcode %>
+        </div>
+        <div class="col-md-8">
+          <%= f.number_field :postcode, class: "form-control" %>
+        </div>
+      </div>
+      <br />
+      <div align="center">
+        <div>
+          <% if flash[:error].present? %>
+            <div id="error_explanation">
+              <p><%= flash[:error] %></p>
+            </div>
+          <% end %>
+          <label class="amount">
+            <h5>Total: A$<%= @purchase.listing.price %></h5>
+            <p>(plus shipping if applicable)</p>
+          </label>
+        </div>
+      
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                data-email="<%= current_user.email %>"
+                data-description="<%= [@purchase.listing.title, @purchase.listing.weight].join(', ') %> grams"
+                data-amount="<%= @purchase.pickup ? @purchase.listing.price : @amount %>"
+                data-locale="auto"
+                data-currency="aud">
+        </script>
+      </div>
+    
+    <% end %>
+</div>

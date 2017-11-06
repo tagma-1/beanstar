@@ -19,8 +19,14 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+
+#Login
 gem 'devise'
+
+#Authorisation
 gem 'pundit'
+
+#Bootstrap
 gem 'bootstrap', '~> 4.0.0.beta2.1'
 gem 'jquery-rails'
 
@@ -44,6 +50,7 @@ gem 'image_processing'
 gem 'mini_magick'
 gem 'shrine'
 
+# Amazon AWS for image uploading
 gem 'aws-sdk', '~> 3'
 
 #For storage and conversion of prices
@@ -53,8 +60,12 @@ gem 'money-rails', '~>1'
 gem 'country_select'
 gem 'bootstrap-datepicker-rails'
 
+#Pagination
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
+
+#Payments
+gem 'stripe'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
