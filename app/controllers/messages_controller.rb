@@ -8,9 +8,9 @@ class MessagesController < ApplicationController
     @messages = @conversation.messages
     
     #limits the messages to be displayed in a conversation to the ten most recent (if there is over ten messages)
-    if @messages.length > 10
+    if @messages.length > 7
       @over_ten = true
-      @messages = @messages[-10..-1]
+      @messages = @messages[-7..-1]
     end
     
     if params[:m]
@@ -18,13 +18,6 @@ class MessagesController < ApplicationController
       @messages = @conversation.messages
     end
     
-    #if the last message displayed does not belong to the current user, this means the message has been read
-    if @messages.last
-      if @messages.last.user_id != current_user.id
-        @messages.last.read = true;
-      end
-    end
-  
     @message = @conversation.messages.new
   end
 
