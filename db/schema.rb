@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171105054342) do
+ActiveRecord::Schema.define(version: 20171106032736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,16 @@ ActiveRecord::Schema.define(version: 20171105054342) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "purchases", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "listing_id"
+    t.string "charge_identifier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["listing_id"], name: "index_purchases_on_listing_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
   create_table "stores", force: :cascade do |t|
     t.bigint "user_id"
     t.string "name"
@@ -101,5 +111,7 @@ ActiveRecord::Schema.define(version: 20171105054342) do
 
   add_foreign_key "listings", "stores"
   add_foreign_key "profiles", "users"
+  add_foreign_key "purchases", "listings"
+  add_foreign_key "purchases", "users"
   add_foreign_key "stores", "users"
 end
