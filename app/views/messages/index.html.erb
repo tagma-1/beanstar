@@ -16,7 +16,7 @@
           <div class="card message-card bg-light mt-4">
             <div class="card-body">
               <p class="card-text"><%= message.content %></p>
-              <p class="card-text"><small><%= message.message_time %></small></p>
+              <p class="card-text"><small><%= message.message_time %><%= " (Store: #{user.store.name})" if user.store %></small></p>
             </div>
           </div>
         <% else %>
@@ -24,7 +24,7 @@
             <div class="card message-card text-white bg-primary mt-4" align="left">
               <div class="card-body">
                 <p class="card-text"><%= message.content %></p>
-                <p class="card-text"><small><%= message.message_time %></small></p>
+                <p class="card-text"><small><%= message.message_time%></small></p>
               </div>
             </div>
           </div>

@@ -135,7 +135,7 @@
     <br />
     
     <p align="center">
-      <%= link_to "Message seller", root_path, class: "btn btn-primary btn-md btn-xlarge" %> 
+      <%= link_to "Message seller", conversations_path(sender_id: current_user.id, recipient_id: @listing.store.user), method: :post, class: "btn btn-primary btn-md btn-xlarge" %> 
       <%= link_to "Other seller roasts", listings_path(id: @listing.store.id), class: "btn btn-primary btn-md btn-xlarge" %>
     </p>
 

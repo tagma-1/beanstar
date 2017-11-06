@@ -16,8 +16,20 @@
     
         <tbody>
           <td><%= conversation.sender_id == current_user.id ? User.find(conversation.recipient_id).profile.profile_name : User.find(conversation.sender_id).profile.profile_name %></td>
-          <td><%= link_to truncate(conversation.messages.last.content, length: 200), conversation_messages_path(conversation) %></td>
-          <td><%= conversation.messages.last.message_time %></td>
+          <td>
+            <% if conversation.messages.last %> 
+              <%= link_to truncate(conversation.messages.last.content, length: 200), conversation_messages_path(conversation) %>
+            <% else %>
+              No messages to display.
+            <% end %>
+          </td>
+          <td>
+            <% if conversation.messages.last %>
+              <%= conversation.messages.last.message_time %>
+            <% else %>
+              <%= link_to 'Send message', conversation_messages_path(conversation), class: "btn btn-primary btn-sm" %>
+            <% end %>
+          </td>
         </tbody>
       
         <!-- bootstrap cards display for the inbox using media queries -->
@@ -27,11 +39,19 @@
           </div>
           <div class="card-body">
             <p class="card-text conversation-truncate">
-              <%= link_to truncate(conversation.messages.last.content, length: 125), conversation_messages_path(conversation) %>
+              <% if conversation.messages.last %> 
+                <%= link_to truncate(conversation.messages.last.content, length: 125), conversation_messages_path(conversation) %>
+              <% else %>
+                No messages to display.
+              <% end %>
             </p>
-            <p class="card-text">
+            <p class="card-text center">
               <small>
-                <%= conversation.messages.last.message_time %>
+                <% if conversation.messages.last %>
+                  <%= conversation.messages.last.message_time %>
+                <% else %>
+                  <%= link_to 'Send message', conversation_messages_path(conversation), class: "btn btn-primary btn-sm" %>
+                <% end %>
               </small>
             </p>
           </div>

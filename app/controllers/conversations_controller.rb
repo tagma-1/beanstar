@@ -9,10 +9,15 @@ class ConversationsController < ApplicationController
     #Only creates a new conversation if one does not already exist between these two users.
     if Conversation.between(params[:sender_id],params[:recipient_id]).present?
       @conversation = Conversation.between(params[:sender_id], params[:recipient_id]).first
-    else
+      redirect_to conversation_messages_path(@conversation)
+    elsif current_user.profile
       @conversation = Conversation.create!(conversation_params)
+      authorize @conversation
+      redirect_to conversation_messages_path(@conversation)
+    else
+      flash[:danger] = "You must create a profile to message other users."
+      redirect_to new_profile_path
     end
-    redirect_to conversation_messages_path(@conversation)
   end
 
 private
