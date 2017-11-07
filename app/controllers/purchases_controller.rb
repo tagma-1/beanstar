@@ -11,8 +11,13 @@ class PurchasesController < ApplicationController
   end
 
   def new
-    @purchase.listing = Listing.find(params[:listing_id])
-    @amount = @purchase.listing.price_cents + @purchase.listing.shipping_cents 
+    if current_user.profile
+      @purchase.listing = Listing.find(params[:listing_id])
+      @amount = @purchase.listing.price_cents + @purchase.listing.shipping_cents
+    else
+      flash[:danger] = "Please create a profile in order to buy products."
+      redirect_to new_profile_path
+    end
   end
   
   def create
@@ -42,6 +47,15 @@ class PurchasesController < ApplicationController
     
     @purchase.charge_identifier = charge.id
     @purchase.save
+    
+    #Automatic mailer to purchaser and seller, according to whether shipping has been selected
+    if @purchase.pickup
+      TransactionMailer.buyer_transaction_email_pickup(@purchase).deliver
+      TransactionMailer.seller_transaction_email_pickup(@purchase).deliver
+    else
+      TransactionMailer.buyer_transaction_email_shipping(@purchase).deliver
+      TransactionMailer.seller_transaction_email_shipping(@purchase).deliver    
+    end
     
     flash[:success] = "Thank you! Your payment has been received. An email has been sent confirming receipt."
     redirect_to root_path
