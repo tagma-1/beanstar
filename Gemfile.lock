@@ -523,6 +523,8 @@ GEM
       activesupport (>= 4.2.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    httparty (0.15.6)
+      multi_xml (>= 0.5.2)
     i18n (0.8.6)
     i18n_data (0.8.0)
     image_processing (0.4.5)
@@ -563,6 +565,7 @@ GEM
       money (~> 6.9.0)
       railties (>= 3.0)
     multi_json (1.12.2)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
     netrc (0.11.0)
     nio4r (2.1.0)
@@ -700,6 +703,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   fastimage
+  httparty
   image_processing
   jbuilder (~> 2.5)
   jquery-rails

@@ -43,12 +43,20 @@
           <td><strong>Customer pickup permitted?</strong></td>
           <td><%= @store.pickup ? "Yes" : "No" %></td>        
         </tr>
+        
+        <!-- display the store's full address if the seller has opted to make pick-up available. If not, displays the seller's general area -->
         <% if @store.pickup %>  
           <tr>
             <td><strong>Address</strong></td>
             <td><%= @address %></td>        
           </tr>
+        <% else %>
+          <tr>
+            <td><strong>Area</strong></td>
+            <td><%= @area.join(', ') %></td>        
+          </tr>        
         <% end %>
+        
         <tr>
           <td><strong>Roasting Schedule</strong></td>
           <td><%= @store.roasting_schedule %></td>        

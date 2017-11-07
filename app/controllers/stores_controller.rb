@@ -12,6 +12,12 @@ class StoresController < ApplicationController
   # GET /stores/1.json
   def show
     @address = [@store.address, @store.suburb, @store.postcode, @store.state].join(', ')
+    
+    # Display the general area where a store is located using postcode API
+    response = HTTParty.get("http://v0.postcodeapi.com.au/suburbs/#{@store.postcode}.json")
+    @area = []
+    response.each { |suburb| @area << suburb['name'] }
+    
   end
 
   # GET /stores/new
@@ -37,9 +43,10 @@ class StoresController < ApplicationController
   def create
     
     if current_user.store == nil
+      
       @store = Store.new(store_params)
       @store.user = current_user
-  
+      
       respond_to do |format|
         if @store.save
           format.html { redirect_to @store, notice: 'Store was successfully created.' }
@@ -95,4 +102,6 @@ class StoresController < ApplicationController
     def store_params
       params.require(:store).permit(:name, :image, :remove_image, :address, :suburb, :state, :postcode, :about, :roasting_schedule, :next_roast, :pickup)
     end
+  
+
 end
