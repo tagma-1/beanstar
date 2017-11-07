@@ -76,6 +76,46 @@
     <p align="center">
       <%= link_to 'My products', listings_path(id: @store.id), class: "btn btn-primary btn-lg" %>  <%= link_to 'Add product', new_listing_path, class: "btn btn-primary btn-lg" %>
     </p>
+    
+    <br />
+    
+    <% if @store.reviews.count > 0 %>
+      <hr />
+      <br />
+      
+      <h4 align="center" class="underline">Store Reviews</h4>
+      
+      <br />
+      
+      <dl class="row" align="center">
+        <dt class="col-md-3">Total reviews:</dt>
+        <dd class="col-md-3"><%= pluralize(@review_count, 'review') %></dd>
+        
+        <dt class="col-md-3">Average User Rating:</dt>
+        <dd class="col-md-3"><%= @average_rating.floor %>%</dd>
+      </dl>
+      <br>
+      <!-- pagination -->
+      <%= will_paginate @store_reviews, :page_links => false, class: 'center' %>
+      <br />
+      
+      <% @store_reviews.each_with_index do |review, index| %>
+        <table class="table">
+          <thead class="thead-light">
+            <tr></tr>
+              <th>
+                <%= index + 1 %>. <%= review.rating %>% | <%= link_to review.user.profile.profile_name, profile_path(review.user.profile) %><small>, <%= review.created_at.to_s(:db)  %></small>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><%= review.content %></td>
+              </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <% end %>
 
   </div>
   
@@ -98,7 +138,7 @@
       </div>
     <% else %>
       <div align="center">
-        <%= image_tag("roasting.jpg", height: "300", width: "450") %>
+        <%= image_tag("roasting.jpg", height: "300", width: "450", class: "display-image") %>
       </div>
     <% end %>
     
@@ -157,7 +197,7 @@
       
       <br />
       
-      <dl class="row" align="center">
+      <dl class="row center" align="center">
         <dt class="col-md-3">Total reviews:</dt>
         <dd class="col-md-3"><%= pluralize(@review_count, 'review') %></dd>
         
