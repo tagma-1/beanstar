@@ -29,9 +29,11 @@ class ReviewsController < ApplicationController
     @review.user_id = current_user.id
     @review.rating = review_params[:rating].to_i
     
+    authorize @review
+    
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
+        format.html { redirect_to store_path(@review.store), notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }
