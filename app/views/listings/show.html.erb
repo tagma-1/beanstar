@@ -25,7 +25,7 @@
     
     <p align="center">
         <%= link_to 'Edit product', edit_listing_path(@listing), class: "btn btn-primary btn-md btn-xlarge" %> 
-        <%= link_to "Delete product", listings_path(@listing), class: "btn btn-danger btn-md", data: { confirm: "Are you sure?" }, method: :delete %>
+        <%= link_to "Delete product", listing_path(@listing), class: "btn btn-danger btn-md", data: { confirm: "Are you sure?" }, method: :delete %>
     </p>
     
     <br />

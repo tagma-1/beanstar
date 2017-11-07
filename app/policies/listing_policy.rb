@@ -13,5 +13,9 @@ class ListingPolicy < ApplicationPolicy
   def update?
     listing.store.user == @user
   end
-
+  
+  def destroy?
+    listing.store.user == @user
+  end
+  
 end

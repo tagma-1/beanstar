@@ -29,7 +29,7 @@
             <% if user_signed_in? && listing.store.user == current_user %>
               <p>
                 <%= link_to "Edit", edit_listing_path(listing), class: "btn btn-primary btn-md btn-xlarge" %> 
-                <%= link_to "Delete", listings_path(@listing), class: "btn btn-danger btn-md", data: { confirm: "Are you sure?" }, method: :delete %> 
+                <%= link_to "Delete", listing_path(listing), class: "btn btn-danger btn-md", data: { confirm: "Are you sure?" }, method: :delete %> 
               </p>
             <% else %>
               <p><%= link_to "View product", listing_path(listing), class: "btn btn-primary btn-xlarge" %> </p>
