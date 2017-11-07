@@ -165,11 +165,17 @@
         <dd class="col-md-3"><%= @average_rating.floor %>%</dd>
       </dl>
       <br>
-      <% @store.reviews.each do |review| %>
+      <!-- pagination -->
+      <%= will_paginate @store_reviews, :page_links => false, class: 'center' %>
+      <br />
+      
+      <% @store_reviews.each_with_index do |review, index| %>
         <table class="table">
           <thead class="thead-light">
             <tr></tr>
-              <th><%= review.rating %>% | <%= link_to review.user.profile.profile_name, profile_path(review.user.profile) %></th>
+              <th>
+                <%= index + 1 %>. <%= review.rating %>% | <%= link_to review.user.profile.profile_name, profile_path(review.user.profile) %><small>, <%= review.created_at.to_s(:db)  %></small>
+              </th>
             </tr>
           </thead>
           <tbody>

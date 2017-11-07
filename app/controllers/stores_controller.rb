@@ -23,6 +23,9 @@ class StoresController < ApplicationController
     #For a new review form on the store show page
     @review = Review.new
     
+    #All reviews for this store
+    @store_reviews = @store.reviews.paginate(page: params[:page], per_page: 5)
+    
     #To display review statistics on store show page
     @average_rating = @store.reviews.average(:rating) if not @store.reviews.empty?
     @review_count = @store.reviews.count if not @store.reviews.empty?

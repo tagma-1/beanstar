@@ -5,8 +5,11 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
+    
+    # If params (store id) is passed in, limit the index to products that belong to that store.
     if params[:id]
       @listings = Listing.where(store_id: params[:id]).paginate(page: params[:page], per_page: 6)
+      
     else
       @listings = Listing.all.paginate(page: params[:page], per_page: 6)
     end
