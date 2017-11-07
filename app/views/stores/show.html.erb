@@ -143,7 +143,43 @@
     <% end %>
     
     <br />
-
+    
+    <!-- allows a signed in user to 'follow' or 'unfollow' a store by clicking a button -->
+    <% if user_signed_in? %>
+      <div class="row">
+        
+        <% if @store.followers.include? current_user %>
+        
+          <div class="col-md-12">
+            <%= form_with(url: stores_following_url, method: :delete, local: true) do |unfollow_form| %>
+        
+                <%= unfollow_form.text_field :store_id, value: @store.id, type: "hidden" %>
+    
+                <div class="form-group" align="center">
+                  <%= unfollow_form.submit 'Unfollow roaster', class: "btn btn-primary btn-lg" %>
+                </div>
+            <% end %>   
+          </div>
+          
+        <% else %>
+        
+          <div class="col-md-12">
+            <%= form_with(url: stores_following_url, local: true) do |following_form| %>
+        
+                <%= following_form.text_field :store_id, value: @store.id, type: "hidden" %>
+    
+                <div class="form-group" align="center">
+                  <%= following_form.submit 'Follow roaster', class: "btn btn-primary btn-lg" %>
+                </div>
+              
+            <% end %>
+          </div>
+          
+        <% end %>
+      </div>
+    <% end %>
+    
+    <!-- allows a signed in user to see a button which starts a chat with the store -->
     <p align="center">
       <% if user_signed_in? %>
         <%= link_to 'Message store', conversations_path(sender_id: current_user.id, recipient_id: @store.user), method: :post, class: "btn btn-primary btn-md btn-xlarge" %>  

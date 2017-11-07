@@ -20,6 +20,9 @@ class StoresController < ApplicationController
     @area = []
     response.each { |suburb| @area << suburb['name'] }
     
+    # To allow a user to 'follow' the store
+    
+    
     #For a new review form on the store show page
     @review = Review.new
     
