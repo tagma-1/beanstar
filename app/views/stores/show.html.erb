@@ -148,7 +148,45 @@
     </table>
     
     <br />
-    
 
+    <% if @store.reviews.count > 0 %>
+      <hr />
+      <br />
+      
+      <h4 align="center" class="underline">Store Reviews</h4>
+      
+      <br />
+      
+      <dl class="row" align="center">
+        <dt class="col-md-3">Total reviews:</dt>
+        <dd class="col-md-3"><%= pluralize(@review_count, 'review') %></dd>
+        
+        <dt class="col-md-3">Average User Rating:</dt>
+        <dd class="col-md-3"><%= @average_rating.floor %>%</dd>
+      </dl>
+      <br>
+      <% @store.reviews.each do |review| %>
+        <table class="table">
+          <thead class="thead-light">
+            <tr></tr>
+              <th><%= review.rating %>% | <%= link_to review.user.profile.profile_name, profile_path(review.user.profile) %></th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><%= review.content %></td>
+              </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <% end %>
+      <br>
+    <% if user_signed_in? %>
+      <hr />
+      <br />
+      <h4 align="center">Enter your review</h4>
+      <br />
+      <%= render 'reviews/form' %>
+    <% end %>
   </div>
 <% end %>

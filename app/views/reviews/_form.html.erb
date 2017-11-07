@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= form_with(model: @review, local: true) do |reviews_form| %>
+    <!--<#%= form_for(@store_review, :html => { class: "form-horizontal", role: "form"}) do |reviews_form| %>-->
+    
+      <%= reviews_form.text_field :store_id, value: @store.id, type: "hidden" %>
+      
+      <div class="form-group row">
+        <div class = "col-md-12">
+          <%= reviews_form.label :content, 'Enter your review:' %>
+        </div>
+        <div class="col-md-12">
+          <%= reviews_form.text_area :content, rows: 7, class: "form-control" %>
+        </div>
+      </div>
+      <br />
+      <div class="form-group row">
+        <div class="control-label col-md-3">  
+          <%= reviews_form.label :rating, "Enter your rating:" %>
+        </div>
+        <div class="col-md-9 input-group">
+          <span class="input-group-addon">%</span>
+          <%= reviews_form.number_field :rating, min: 1, step: 1, max: 100, id: :review_rating, class: "form-control", required: true %>
+        </div>
+      </div>
+      <br>  
+      <div class="form-group" align="center">
+        <%= reviews_form.submit 'Submit your review', class: "btn btn-primary btn-lg btn-xlarge" %>
+      </div>
+    <% end %>
+  </div>
+</div>
