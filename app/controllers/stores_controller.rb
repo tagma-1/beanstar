@@ -11,12 +11,21 @@ class StoresController < ApplicationController
   # GET /stores/1
   # GET /stores/1.json
   def show
+    
+    # Full address
     @address = [@store.address, @store.suburb, @store.postcode, @store.state].join(', ')
     
     # Display the general area where a store is located using postcode API
     response = HTTParty.get("http://v0.postcodeapi.com.au/suburbs/#{@store.postcode}.json")
     @area = []
     response.each { |suburb| @area << suburb['name'] }
+    
+    #For a new review form on the store show page
+    @review = Review.new
+    
+    #To display review statistics on store show page
+    @average_rating = @store.reviews.average(:rating) if not @store.reviews.empty?
+    @review_count = @store.reviews.count if not @store.reviews.empty?
     
   end
 
