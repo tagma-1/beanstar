@@ -55,18 +55,19 @@
 <!-- If there are no products to display for this user/store -->
 <% else %>
   
-  <%= render 'shared/page_title', title: "#{Store.find(params[:id]).name}'s Products" %>
+  <%= render 'shared/page_title', title: "Beans" %>
   
   <br />
 
-  <h4 align="center">This store doesn't have any roasts listed for sale.</h4>
+  <h4 align="center">No roasts to display.</h4>
   
   <br />
   <br />
   
-  <p align="center">
-    <%= link_to "Return to store", store_path(params[:id]), class: "btn btn-lg btn-primary btn-xlarge" %>   
-    <%= link_to "All beans", listings_path, class: "btn btn-primary btn-lg btn-xlarge" %> 
-  </p>
-
+  <% if user_signed_in? %>
+    <p align="center">
+      <%= link_to "Return to store", store_path(params[:id]), class: "btn btn-lg btn-primary btn-xlarge" %>   
+      <%= link_to "All beans", listings_path, class: "btn btn-primary btn-lg btn-xlarge" %> 
+    </p>
+  <% end %>
 <% end %>

@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: beanstar_production
-  username: beanstar
-  password: <%= ENV['BEANSTAR_DATABASE_PASSWORD'] %>
+  username: <%= ENV['PG_USERNAME'] %>
+  password: <%= ENV['PG_PASSWORD'] %>
