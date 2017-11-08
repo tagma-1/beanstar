@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   
   resources :profiles
   resources :listings
+  post 'stores/following' => 'followers#create'
+  delete 'stores/following' => 'followers#destroy'
   resources :stores
   resources :reviews
 

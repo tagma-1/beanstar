@@ -1,6 +1,7 @@
 class Store < ApplicationRecord
   include ImageUploader[:image]
   belongs_to :user
+  has_and_belongs_to_many :followers, class_name: "User", join_table: :following
   has_many :listings, dependent: :destroy
   has_many :reviews, dependent: :destroy
   
