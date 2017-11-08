@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :stores
   resources :reviews
 
+  get '/search' => 'results#index' 
   
   resources :conversations do
     resources :messages

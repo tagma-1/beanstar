@@ -1,5 +1,10 @@
 class Store < ApplicationRecord
+  
+  include PgSearch
+  multisearchable :against => [:name, :address, :suburb, :state, :postcode, :about] 
+  
   include ImageUploader[:image]
+  
   belongs_to :user
   has_and_belongs_to_many :followers, class_name: "User", join_table: :following
   has_many :listings, dependent: :destroy
@@ -12,6 +17,7 @@ class Store < ApplicationRecord
   validates :state, presence: true
   validates :postcode, presence: true, numericality: { less_than_or_equal_to: 9999 }
   
+  #Only validates the address and suburb if the user has elected to make pickup available
   with_options if: :pickup? do |location|
     location.validates :address, presence: true
     location.validates :suburb, presence: true
