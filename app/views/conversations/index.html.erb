@@ -40,7 +40,7 @@
           <div class="card-body">
             <p class="card-text conversation-truncate">
               <% if conversation.messages.last %> 
-                <%= link_to truncate(conversation.messages.last.content, length: 125), conversation_messages_path(conversation) %>
+                <%= link_to truncate(conversation.messages.last.content, length: 100), conversation_messages_path(conversation) %>
               <% else %>
                 No messages to display.
               <% end %>

@@ -32,7 +32,7 @@ class TransactionMailer < ApplicationMailer
       message_params = {:from    => "beanstar@example.com",
                         :to      => @buyer.email,
                         :subject => 'Purchase Receipt - Beanstar',
-                        :text    => "Thank you for shopping at Beanstar! This email confirms your purchase of #{@product.title} - #{@product.weight} grams from #{@product.store.name} for $#{@product.price}. Your order is now available for collection from #{@product.store.namew} at #{[@product.store.address, @product.store.suburb, @product.store.postcode, @product.store.state].join(', ')}."}
+                        :text    => "Thank you for shopping at Beanstar! This email confirms your purchase of #{@product.title} - #{@product.weight} grams from #{@product.store.name} for $#{@product.price}. Your order is now available for collection from #{@product.store.name} at #{[@product.store.address, @product.store.suburb, @product.store.postcode, @product.store.state].join(', ')}."}
                         
       mg_client.send_message ENV.fetch('MAILGUN_DOMAIN'), message_params
     

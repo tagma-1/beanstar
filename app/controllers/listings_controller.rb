@@ -8,10 +8,10 @@ class ListingsController < ApplicationController
     
     # If params (store id) is passed in, limit the index to products that belong to that store.
     if params[:id]
-      @listings = Listing.where(store_id: params[:id]).paginate(page: params[:page], per_page: 6)
+      @listings = Listing.where(store_id: params[:id]).order_list(params[:sort_by]).paginate(page: params[:page], per_page: 6)
       
     else
-      @listings = Listing.all.paginate(page: params[:page], per_page: 6)
+      @listings = Listing.all.order_list(params[:sort_by]).paginate(page: params[:page], per_page: 6)
     end
   end
 
@@ -89,7 +89,7 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:title, :variety, :country, :region, :producer, :notes, :roast, :grind, :weight, :roast_date, :about, :product_image, :price_cents, :shipping_cents)
+      params.require(:listing).permit(:title, :variety, :country, :region, :producer, :notes, :roast, :grind, :weight, :roast_date, :about, :product_image, :price_cents, :shipping_cents, :sort_by)
     end
     
 end

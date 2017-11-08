@@ -2,7 +2,18 @@
 <% if @listings.any? %>
  
     <%= render 'shared/page_title', title: "Beans" %>
-  
+    <div align="center">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+          Sort by
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><%= link_to "Newest", listings_path(sort_by: "newest") %></li>
+          <li><%= link_to "Name", listings_path(sort_by: "name") %></li>
+        </ul>
+      </div>
+    </div>
     <!-- pagination -->
     <%= will_paginate @listings, :page_links => false, class: 'center' %>
     

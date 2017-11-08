@@ -5,7 +5,7 @@ class StoresController < ApplicationController
   # GET /stores
   # GET /stores.json
   def index
-    @stores = Store.all.paginate(page: params[:page], per_page: 6)
+    @stores = Store.all.order_list(params[:sort_by]).paginate(page: params[:page], per_page: 6)
   end
 
   # GET /stores/1
@@ -115,7 +115,7 @@ class StoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def store_params
-      params.require(:store).permit(:name, :image, :remove_image, :address, :suburb, :state, :postcode, :about, :roasting_schedule, :next_roast, :pickup)
+      params.require(:store).permit(:name, :image, :remove_image, :address, :suburb, :state, :postcode, :about, :roasting_schedule, :next_roast, :pickup, :sort_by)
     end
   
 

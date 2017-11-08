@@ -22,4 +22,16 @@ class Listing < ApplicationRecord
     country_n.name
   end
   
+  # Ordering method for sort function
+  def self.order_list(sort_order)
+    case sort_order
+      when "newest" || sort_order.blank?
+        order(created_at: :desc)
+      when "name"
+        order(title: :asc)
+      else
+        order(created_at: :desc)
+    end
+  end
+  
 end

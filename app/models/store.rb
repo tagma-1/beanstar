@@ -17,5 +17,21 @@ class Store < ApplicationRecord
     location.validates :suburb, presence: true
   end  
   
+  # Scope for average store ratings (used for sort)
+  scope :rating_order, -> {
+    joins(:reviews).select("stores.id, avg(reviews.rating) as average_rating").group("stores.id").order("average_rating DESC")
+  }
+  
+  # Ordering method for sort function
+  def self.order_list(sort_order)
+    case sort_order
+      when "name" || sort_order.blank?
+        order(name: :asc)
+      when "store rating"
+        rating_order
+      else
+        order(name: :asc)
+    end
+  end
   
 end

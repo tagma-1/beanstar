@@ -1,5 +1,19 @@
 <%= render 'shared/page_title', title: "Roasters" %>
 
+<!-- sort drop-down menu -->
+<div align="center">
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+      Sort by
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><%= link_to "Name", listings_path(sort_by: "name") %></li>
+      <li><%= link_to "Store rating", listings_path(sort_by: "store rating") %></li>
+    </ul>
+  </div>
+</div>
+
 <!-- pagination -->
 
 <%= will_paginate @posts, :page_links => false, class: 'center' %>
