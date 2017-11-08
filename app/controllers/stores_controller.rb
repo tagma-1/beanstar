@@ -6,6 +6,7 @@ class StoresController < ApplicationController
   # GET /stores.json
   def index
     @stores = Store.all.order_list(params[:sort_by]).paginate(page: params[:page], per_page: 6)
+    
   end
 
   # GET /stores/1

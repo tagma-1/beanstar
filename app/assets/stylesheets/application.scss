@@ -150,6 +150,21 @@ table {
   color: inherit;
 }
 
+.page-subtitle {
+  color: #562300;
+  text-decoration: none;
+}
+
+.home-table a {
+  text-decoration: none;
+  color: #562300;
+}
+
+.home-table th {
+  border-top: none;
+}
+
+
 @media screen and (max-width: 800px) {
   
   .inbox-desktop {

@@ -8,8 +8,8 @@
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-      <li><%= link_to "Name", listings_path(sort_by: "name") %></li>
-      <li><%= link_to "Store rating", listings_path(sort_by: "store rating") %></li>
+      <li><%= link_to "Name", stores_path(sort_by: "name") %></li>
+      <li><%= link_to "Store rating", stores_path(sort_by: "store rating") %></li>
     </ul>
   </div>
 </div>
@@ -34,7 +34,7 @@
       <div class="card-body">
         <h4 class="card-title"><%= store.name %></h4>
         <p class="card-text"><strong>Roasting in:</strong> <%= store.state %></p>
-        <p class="card-text"><strong>Average rating:</strong> | <strong>Followers:</strong></p>
+        <p class="card-text"><strong>Average rating:</strong> <%= store_rating(store) %> | <strong>Followers:</strong> <%= followers(store) %></p>
         <p><%= link_to "View store", store_path(store), class: "btn btn-primary btn-xlarge" %> </p>
       </div>
     </div>

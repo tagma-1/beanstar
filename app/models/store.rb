@@ -19,7 +19,7 @@ class Store < ApplicationRecord
   
   # Scope for average store ratings (used for sort)
   scope :rating_order, -> {
-    joins(:reviews).select("stores.id, avg(reviews.rating) as average_rating").group("stores.id").order("average_rating DESC")
+    joins(:reviews).select("stores.*, avg(reviews.rating) as average_rating").group("stores.id").order("average_rating DESC")
   }
   
   # Ordering method for sort function
@@ -28,7 +28,7 @@ class Store < ApplicationRecord
       when "name" || sort_order.blank?
         order(name: :asc)
       when "store rating"
-        rating_order
+        rating_order 
       else
         order(name: :asc)
     end

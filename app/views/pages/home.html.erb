@@ -13,26 +13,33 @@
 </div>
 
 <div class="container">
-  <!-- Example row of columns -->
   <div class="row">
     <div class="col-md-4">
-      <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      <%= image_tag("coffee_1.jpg", width: '25%', class: "card-img-top") %>
+      <h3 align="center"><%= link_to "Browse by beans", listings_path, class: "page-subtitle" %></h3>
     </div>
     <div class="col-md-4">
-      <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      <%= image_tag("coffee_3.jpg", width: '25%', class: "card-img-top") %>
+      <h3 align="center"><%= link_to "Browse by roasters", listings_path, class: "page-subtitle" %></h3>
     </div>
     <div class="col-md-4">
-      <h2>Heading</h2>
-      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-      <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      <h3 align="center" class="page-subtitle">Top Roasters</h3>
+      <table class="table table-sm table-striped center home-table">
+        <thead>
+          <th class="underline">Name</th>
+          <th class="underline">Rating</th>
+        </thead>
+        <tbody>
+          <% Store.rating_order.each_with_index do |store, index| %>
+            <tr>
+              <td><%= link_to store.name, stores_path(store) %></td>
+              <td><%= store.reviews.average(:rating).floor %>%</td>
+            </tr>
+            <% break if index == 5 %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
-
-  <hr>
-
 </div> <!-- /container -->
 
