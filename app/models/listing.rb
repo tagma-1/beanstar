@@ -1,5 +1,10 @@
 class Listing < ApplicationRecord
+  
+  include PgSearch
+  multisearchable :against => [:title, :variety, :country, :region, :producer, :notes, :roast] 
+
   include ImageUploader[:product_image]
+  
   belongs_to :store
   attr_accessor :country_name
   

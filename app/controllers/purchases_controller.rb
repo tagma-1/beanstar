@@ -1,13 +1,14 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_purchase, only: [:new, :create]
-  
+
   def index
     #List the purchases made by the logged in user
     @purchases = Listing.where(store: current_user.store)
   end
 
   def show
+    @purchase = Purchase.find(params[:id])
   end
 
   def new
@@ -58,7 +59,7 @@ class PurchasesController < ApplicationController
     end
     
     flash[:success] = "Thank you! Your payment has been received. An email has been sent confirming receipt."
-    redirect_to root_path
+    redirect_to purchase_path(@purchase)
   
     rescue Stripe::CardError => e
       flash[:error] = e.message

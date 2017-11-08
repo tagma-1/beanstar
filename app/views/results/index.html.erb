@@ -1,0 +1,15 @@
+<%= render 'shared/page_title', title: "Search results" %>
+
+<% if not @pg_search_documents.empty? %>
+  <div class="container">
+    <ol>
+      <% @pg_search_documents.each do |pg_search_document| %>
+      <li> <%= link_to pg_search_document.searchable.title, pg_search_document.searchable %></li>
+      <% end %>
+    </ol>
+<% else %>
+    <h4 align="center">No results to display.</h4>
+  </div>
+<% end %>
+  
+  

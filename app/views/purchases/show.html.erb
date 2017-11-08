@@ -1,2 +1,29 @@
-<h1>Purchases#show</h1>
-<p>Find me in app/views/purchases/show.html.erb</p>
+<%= render 'shared/page_title', title: "Payment Confirmation" %>
+
+<h4 align="center">Your order reference is "<%= @purchase.charge_identifier%>"</h4>
+
+<br />
+
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <th>Product</th>
+      <th>Price</th>
+      <th>Shipping</th>
+    </thead>
+    <tbody>
+      <td>
+        <strong><%= @purchase.listing.title %></strong></em>
+        <ul>
+          <li><small><strong>Size:</strong> <%= @purchase.listing.weight %> grams</small></li>
+          <li><small><strong>Variety:</strong> <%= @purchase.listing.variety %></small></li>
+          <li><small><strong>Origin:</strong> <%= @purchase.listing.country_name %></small></li>
+          <li><small><strong>Roast:</strong> <%= @purchase.listing.roast %></small></li>
+          <li><small><strong>Roasted on:</strong> <%= time_tag @purchase.listing.roast_date %></small></li>
+        </ul>
+      </td>
+      <td>A$<%= @purchase.listing.price %></td>
+      <td>A$<%= @purchase.listing.shipping %></td>
+    </tbody>
+  </table>
+</div>
