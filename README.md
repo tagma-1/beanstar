@@ -70,7 +70,7 @@ These were <a href="https://trello.com/b/JkPtVpr2/two-sided-marketplace-beanstar
 The second phase of the design process was to create low-fidelity wireframes to set out the structure, flow and content of the application. The focus here was on mobile-first design, and over twenty wireframes were produced which followed the user journey through the application. These mobile wireframes were made based on a 320 x 568 pixel screen size and account for almost all of the functions and pages which were ultimately developed - therefore also serving as a work-flow diagram of the user journey. Some key design decisions were made at this point, including:
 
  - That users needed to be logged in to make purchases, contact sellers and make their own reviews of stores; but that the product listings, store pages and basic profile pages would be available to anyone who visited the page; and
- <br />
+ 
  - That - in addition to directing visitors to sign up - the home/landing page would make listings of products (beans) and stores (roasters) clearly available, along with a list of the top 5 roasters (by user rating).
 
 
