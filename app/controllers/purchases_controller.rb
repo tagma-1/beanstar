@@ -2,13 +2,9 @@ class PurchasesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_purchase, only: [:new, :create]
 
-  def index
-    #List the purchases made by the logged in user
-    @purchases = Listing.where(store: current_user.store)
-  end
-
   def show
     @purchase = Purchase.find(params[:id])
+    authorize @purchase
   end
 
   def new

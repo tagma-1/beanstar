@@ -1,11 +1,11 @@
 <%= render 'shared/page_title', title: "Payment Confirmation" %>
 
-<h4 align="center">Your order reference is "<%= @purchase.charge_identifier%>"</h4>
+<h5 align="center">Your order reference is "<%= @purchase.charge_identifier%>"</h5>
 
 <br />
 
 <div class="container">
-  <table class="table">
+  <table class="table table-responsive-sm">
     <thead class="thead-dark">
       <th>Product</th>
       <th>Price</th>

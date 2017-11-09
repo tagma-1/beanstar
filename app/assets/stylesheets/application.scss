@@ -81,10 +81,6 @@ h1 {
   border-color: #FFF;
 }
 
-.control-label {
-  padding-top: 0.5em;
-}
-
 .card-body {
   padding: 0.25em;
 }
@@ -164,11 +160,39 @@ table {
   border-top: none;
 }
 
+.footer {
+  display: inline-block;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  margin-bottom: 0;
+  padding-top: 15px;
+  color: #000000;
+}
+
+
+@media screen and (max-width: 350px) {
+  
+  .card-listings, .card-stores {
+    min-width: 260px;
+    min-height: 154px;
+  }
+  
+  img {
+    max-width: 260px;
+    max-height: 150px;
+  }
+
+}
 
 @media screen and (max-width: 800px) {
   
   .inbox-desktop {
     display: none;
+  }
+  
+  .card {
+  max-width: 90%;
   }
   
   .message-card {
@@ -177,6 +201,10 @@ table {
 
   .btn-xlarge {
     margin-bottom: 1em;
+  }
+  
+  .card .btn-xlarge {
+    margin-bottom: 0;
   }
   
 }

@@ -1,46 +1,56 @@
 <%= render 'shared/page_title', title: "Roasters" %>
 
-<!-- sort drop-down menu -->
-<div align="center">
-  <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-      Sort by
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><%= link_to "Name", stores_path(sort_by: "name") %></li>
-      <li><%= link_to "Store rating", stores_path(sort_by: "store rating") %></li>
-    </ul>
-  </div>
-</div>
-
-<!-- pagination -->
-
-<%= will_paginate @posts, :page_links => false, class: 'center' %>
-
-<br />
- 
-
-<div class="container" align="center">
-  <div class="card-deck container">
-  <% @stores.each do |store| %>
-  
-    <div class="card card-stores mt-4">
-      <% if store.image %>
-        <%= image_tag store.image_url(:original), class: "card-img-top", alt: "No product image available.", height: '180', width: '318' %> 
-      <% else %>
-        <%= image_tag("roasting.jpg", height: '180', width: '318', class: "card-img-top") %>
-      <% end %>
-      <div class="card-body">
-        <h4 class="card-title"><%= store.name %></h4>
-        <p class="card-text"><strong>Roasting in:</strong> <%= store.state %></p>
-        <p class="card-text"><strong>Average rating:</strong> <%= store_rating(store) %> | <strong>Followers:</strong> <%= followers(store) %></p>
-        <p><%= link_to "View store", store_path(store), class: "btn btn-primary btn-xlarge" %> </p>
-      </div>
+<% if @stores.any? %>   
+  <!-- sort drop-down menu -->
+  <div align="center">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+        Sort by
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Name", stores_path(sort_by: "name") %></li>
+        <li><%= link_to "Store rating", stores_path(sort_by: "store rating") %></li>
+      </ul>
+      <br />
     </div>
-    
-    <br />
-    
-  <% end %>
   </div>
-</div>
+  
+  <!-- pagination -->
+  
+  <%= will_paginate @posts, :page_links => false, class: 'center' %>
+  
+  <br />
+   
+  
+  <div class="container" align="center">
+    <div class="card-deck container">
+    <% @stores.each do |store| %>
+    
+      <div class="card card-stores mt-4">
+        <% if store.image %>
+          <%= image_tag store.image_url(:original), class: "card-img-top", alt: "No product image available.", height: '180', width: '318' %> 
+        <% else %>
+          <%= image_tag("roasting.jpg", height: '180', width: '318', class: "card-img-top") %>
+        <% end %>
+        <div class="card-body">
+          <h4 class="card-title"><%= store.name %></h4>
+          <p class="card-text"><strong>Roasting in:</strong> <%= store.state %></p>
+          <p class="card-text"><strong>Average rating:</strong> <%= store_rating(store) %> | <strong>Followers:</strong> <%= followers(store) %></p>
+          <p><%= link_to "View store", store_path(store), class: "btn btn-primary btn-xlarge" %> </p>
+        </div>
+      </div>
+      
+      <br />
+      
+    <% end %>
+    </div>
+  </div>
+<% else %>
+  <br />
+
+  <h4 align="center">No roastets to display.</h4>
+  
+  <br />
+  <br />
+<% end %>

@@ -7,7 +7,23 @@ class ConversationPolicy < ApplicationPolicy
   end
 
   def create?
-    conversation.sender_id == @user.id || conversation.recipient_id == @user.id
+    conversation.sender == @user
   end
-
+  
+  def edit?
+    false
+  end
+  
+  def update?
+    false
+  end
+  
+  def destroy?
+    false
+  end
+  
+  def index?
+    conversation.recipient == @user || conversation.sender == @user
+  end
+  
 end
