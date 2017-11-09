@@ -23,7 +23,7 @@
       <h3 align="center"><%= link_to "Browse by roasters", listings_path, class: "page-subtitle" %></h3>
     </div>
     
-    <!-- display the top 6 roasters (by user rating) -->
+    <!-- display the top 5 roasters (by user rating) -->
     <div class="col-md-4 mobile-break">
       <h3 align="center" class="page-subtitle">Top Roasters</h3>
       <table class="table table-sm table-striped center home-table">
@@ -37,7 +37,7 @@
               <td><%= link_to store.name, stores_path(store) %></td>
               <td><%= store.reviews.average(:rating).floor %>%</td>
             </tr>
-            <% break if index == 5 %>
+            <% break if index == 4 %>
           <% end %>
         </tbody>
       </table>
