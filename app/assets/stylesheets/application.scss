@@ -170,6 +170,12 @@ table {
   color: #000000;
 }
 
+.mobile-break {
+  border-top: 1px solid grey;
+  margin-top: 2em;
+  padding-top: 1em;
+}
+  
 
 @media screen and (max-width: 350px) {
   
@@ -185,7 +191,7 @@ table {
 
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 765px) {
   
   .inbox-desktop {
     display: none;
@@ -209,7 +215,7 @@ table {
   
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 765px) {
   
   .inbox-mobile {
     display: none;
@@ -217,6 +223,12 @@ table {
   
   .message-card {
     max-width: 60%;
+  }
+  
+  .mobile-break {
+    border-top: none;
+    margin-top: none;
+    padding-top: none;
   }
   
 }
