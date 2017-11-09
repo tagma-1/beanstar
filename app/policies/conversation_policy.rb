@@ -7,7 +7,7 @@ class ConversationPolicy < ApplicationPolicy
   end
 
   def create?
-    conversation.sender == @user
+    conversation.sender == @user || conversation.recipient == @user
   end
   
   def edit?
