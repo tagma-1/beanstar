@@ -6,7 +6,7 @@
 Beanstar is a project demonstration (not for commercial use) of a two-sided marketplace for niche coffee roasters to sell roast coffee beans and/or ground coffee to discerning customers. This documentation can be navigated using the following links:
 
 1. [Overview](#overview) 
-2. [Setup, configure and use](#setup-configure-and-use)
+2. [Use](#use)
 3. [User stories and profiles](#user-stories-and-profiles)
 4. [Wireframes](#wireframes)
 5. [Database design and ERD](#database-design-and-erd)
@@ -42,7 +42,7 @@ Beanstar's solution to this problem is to offer a two-sided market place where a
 
 This application was developed over a 12 day period - with 3 days originally allocated for user story, wireframe and database design and  9 days allocated for development. This estimation proved to be accurate, and the project was completed on schedule.
 
-## Setup, configure and use
+## Use
 
 Noting its focus on small business and individual sellers, Beanstar was designed to be easy to sign up for and use. The application has been deployed to Heroku and is live at: https://beanstar.herokuapp.com/. Listing an item for sale takes only four steps:
 
