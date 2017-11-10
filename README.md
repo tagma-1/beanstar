@@ -27,7 +27,7 @@ The site offers a range of features to assist sellers, buyers and the coffee com
  - Beanstar was built using Ruby on Rails (Rails v5.1.4, Ruby v2.4.2), PostgreSQL, Bootstrap 4, CSS3 and HTML5 and deployed to Heroku. A list of the gems used can be found [below](#gems).
  - The application was designed and wireframed using Figma. The wireframes can be found <a href="https://www.figma.com/file/Wg1dSvnq7xFOieUXv4cdDBlj/Major-Project---Beanstar">here</a>. 
  - Planning and project management was tracked using Trello. The board can be found <a href="https://trello.com/b/JkPtVpr2/two-sided-marketplace-beanstar">here</a>. 
- - Other services used include AWS S3 (image uploading/data storage), and Mailgun (for transaction confirmation emails).
+ - Other integrated functionality includes AWS S3 (image uploading/data storage), Mailgun (for transaction confirmation emails), and the Australian Suburb and Postcode API to display general location based on postcode. 
  
 
 ### Problem
